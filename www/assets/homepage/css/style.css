@@ -1,0 +1,232 @@
+/* preloader animation */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999;
+}
+
+.rainbow-loader {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  animation: rotate 2s linear infinite;
+}
+
+.rainbow-loader .circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 5px solid transparent;
+  border-top-color: #ff0000;
+  animation: spin 2s linear infinite;
+}
+
+.rainbow-loader .circle:nth-child(2) {
+  border-top-color: #ff7f00;
+  animation-delay: -1.8s;
+}
+
+.rainbow-loader .circle:nth-child(3) {
+  border-top-color: #ffff00;
+  animation-delay: -1.6s;
+}
+
+.rainbow-loader .circle:nth-child(4) {
+  border-top-color: #00ff00;
+  animation-delay: -1.4s;
+}
+
+.rainbow-loader .circle:nth-child(5) {
+  border-top-color: #0000ff;
+  animation-delay: -1.2s;
+}
+
+.rainbow-loader .circle:nth-child(6) {
+  border-top-color: #4b0082;
+  animation-delay: -1s;
+}
+
+.rainbow-loader .circle:nth-child(7) {
+  border-top-color: #8f00ff;
+  animation-delay: -0.8s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+.active{
+    background-color: #020765 !important;
+    color: white !important;
+   }
+  
+  
+    img {
+    transition: transform 0.3s;
+  }
+  
+  img:hover {
+    transform: scale(0.9) !important;
+  }
+  
+  
+  .notification-badge-cart {
+    position: absolute;
+    top: 10px;
+    right: 6px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+  }
+  .notification-badge-wishlist {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+  }
+  
+  .card-img {
+      height: 350px;
+      width: 300px;
+      /* object-fit: cover; */
+    }
+  .featured-product{
+    border-radius: 10px !important;
+  }
+  
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: background-color 0.3s;
+  }
+  
+  .overlay:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  
+  .overlay h5 {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .overlay i {
+    color: white;
+    margin-left: 5px;
+  }
+  
+  
+  .card-img {
+    transition: transform 0.3s;
+  }
+  
+  .card-img:hover {
+    transform: scale(1.1);
+  }
+  
+  
+  
+  
+      .search-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Add this line */
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid white;
+      }
+      
+      .search-bar .input-group-prepend .custom-select {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        height: 38px !important;
+        border: 1px solid white;
+      }
+      
+      .search-bar .form-control {
+        flex-grow: 1;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border: 1px solid white;
+      }
+      
+      .search-bar .input-group-append .btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border: 1px solid white;
+      }
+      
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      
+      .navbar-nav {
+        margin: 0 auto; /* Add this line */
+        display: flex; /* Add this line */
+        align-items: center; /* Add this line */
+      }
+  
+
+
+
+
+
+      
+
+
+.cards-wrapper{
+  display: flex !important;
+}
+.card{
+  margin: 0 .5rem;
+  color:black !important;
+}

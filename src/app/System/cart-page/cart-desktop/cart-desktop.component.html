@@ -1,0 +1,357 @@
+<div>
+  <div class="_1Er18h">
+    <div class="_6t1WkM _3HqJxg">
+      <div
+        class="my-md-2 conatainer"
+        style="display: flex; justify-content: space-between"
+      >
+        <nav aria-label="breadcrumb" style="width: 100%">
+          <ol
+            class="breadcrumb mb-0 mb-lg-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+            style="display: flex; justify-content: space-between; width: 100%"
+          >
+            <li>
+              <a [routerLink]="['/']">
+                <i class="fa fa-home" style="margin-right: 5px"></i>Home</a
+              >
+            </li>
+            <li>
+              <a onclick="window.history.back()"
+                ><i class="fa fa-arrow-left" style="margin-right: 5px"></i
+                >Back</a
+              >
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <!-- loading -->
+      <div
+        style="
+          height: 700px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+        *ngIf="loading"
+      >
+        <app-loading></app-loading>
+      </div>
+      <div *ngIf="!loading" class="_1YokD2 _2GoDe3 col-12-12">
+        <div class="_1YokD2 _3Mn1Gg" style="flex-grow: 1; overflow: visible">
+          <div
+            class="_1YokD2 _3Mn1Gg col-12-12"
+            style="box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px"
+          >
+            <div class="_1AtVbE col-12-12" style="padding: 0px 0px 10px">
+              <div class="KElRai">
+                <div
+                  class="_3jn8H7"
+                  style="
+                    background: linear-gradient(
+                      105.62deg,
+                      #fff3da 0.67%,
+                      #ffedca 100%
+                    );
+                  "
+                >
+                  <a class="_2hJxpa">
+                    <div class="_2FYYw1 _2_OGP3 _2T1qz2">Electronics</div> </a
+                  ><a class="_2hJxpa">
+                    <div class="_2FYYw1">Furnicture</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="_1AtVbE col-12-12"
+              *ngFor="let obj of cartdetails.cart_list"
+            >
+              <div class="zab8Yh _10k93p">
+                <div class="_2nQDXZ">
+                  <a
+                    ><span>
+                      <div class="CXW8mj" style="height: 112px; width: 112px">
+                        <img
+                          loading="lazy"
+                          class="_396cs4"
+                          alt=""
+                          src="{{
+                            obj.product_details.full_default_product_image
+                          }}"
+                        />
+                      </div> </span
+                  ></a>
+                  <div class="_3fSRat">
+                    <div class="_2-uG6-">
+                      <a class="_2Kn22P gBNbID">{{
+                        obj.product_details.product_name
+                      }}</a>
+                    </div>
+                    <!-- <div class="_20RCA6">8 GB RAM</div>
+                  <div class="_3ZS8sw">Seller:MYTHANGLORYRetail</div> -->
+                    <span class="_2-ut7f _2xc6hH"
+                      >₹ {{ obj.product_details.mrp_price }}</span
+                    ><span class="_2-ut7f _1WpvJ7"
+                      >₹ {{ obj.product_details.offer_price }}</span
+                    >
+                    <!-- <span class="dML6Ak">56% Off</span>
+                  <div class="_3zPVJV">
+                    <div class="ebO6Mt" id="offers-LSTMOBGBNBDZJ5Q3RXKUCNNBS">
+                      Buy for ₹31999 with bank offers<svg
+                        width="14"
+                        height="14"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="_3GN0Y0"
+                      >
+                        <g fill="none">
+                          <path d="M-1-1h16v16H-1"></path>
+                          <path
+                            d="M7 0C3.136 0 0 3.136 0 7s3.136 7 7 7 7-3.136 7-7-3.136-7-7-7zm.7 10.5H6.3V6.3h1.4v4.2zm0-5.6H6.3V3.5h1.4v1.4z"
+                            fill="#388e3c"
+                            class=""
+                          ></path>
+                        </g>
+                      </svg>
+                    </div>
+                  </div> -->
+                    <!-- <div class="_8XOYjq">
+                    <div>
+                      <div class="_2Tpdn3">+ ₹69 Secured Packaging Fee</div>
+                    </div>
+                  </div> -->
+                  </div>
+                  <!-- <div class="_2zbf83">
+                  <ul class="_1ZEsQ4">
+                    <li class="JEy4SL">
+                      <div class="_2pqhhf">
+                        Delivery by Tomorrow, Sat |
+                        <span class="_3CWtsA"
+                          ><span class="_1OMRfP">Free</span></span
+                        ><span class="_3CWtsA _2_Yr5B">₹70</span>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul class="_31bLAK"></ul>
+                </div> -->
+                </div>
+                <div class="nZz3kj _1hNI6F">
+                  <div class="_1uc2IE">
+                    <div class="_3dY_ZR">
+                      <button
+                        class="_23FHuj"
+                        (click)="updatecartquantityless(obj, quantity.value)"
+                      >
+                        –
+                      </button>
+                      <div class="_26HdzL">
+                        <input
+                          #quantity
+                          type="text"
+                          class="_253qQJ"
+                          value="{{ obj.quantity }}"
+                        />
+                      </div>
+                      <button
+                        (click)="updatecartquantityPlus(obj, quantity.value)"
+                        class="_23FHuj"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div class="_10vWcL td-FUv WDiNrH">
+                    <div class="_3dsJAO" (click)="addsaveforlater(obj)">
+                      Save for later
+                    </div>
+                    <div class="_3dsJAO" (click)="deletcart(obj)">Remove</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="_1AtVbE col-12-12 _78xt5Y">
+              <div class="VUS-tD eBV0fb" [routerLink]="['/buy']">
+                <form method="post">
+                  <input type="hidden" name="domain" value="physical" /><button
+                    (click)="routePath(cartdetails)"
+                    class="_2KpZ6l _2ObVJD _3AWRsL"
+                  >
+                    <span>Place Order</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- save for later -->
+          <div
+            class="_1YokD2 _3Mn1Gg col-12-12"
+            style="
+              box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+              background-color: rgb(255, 255, 255);
+              margin: 20px 0px 0px;
+            "
+          >
+            <div class="_1AtVbE col-12-12">
+              <div class="_1-GQyH">
+                <div class="_3g_HeN">
+                  Saved For Later ( {{ cartdetails.save_later_list.length }} )
+                </div>
+                <div></div>
+              </div>
+            </div>
+            <div class="_1AtVbE col-12-12">
+              <div
+                class="zab8Yh _10k93p"
+                *ngFor="let obj of cartdetails.save_later_list"
+              >
+                <div class="_2nQDXZ">
+                  <a
+                    ><span>
+                      <div class="CXW8mj" style="height: 112px; width: 112px">
+                        <img
+                          loading="lazy"
+                          class="_396cs4"
+                          alt=""
+                          src="{{
+                            obj.product_details.full_default_product_image
+                          }}"
+                        />
+                      </div> </span
+                  ></a>
+                  <div class="_3fSRat">
+                    <div class="_2-uG6-">
+                      <a class="_2Kn22P gBNbID">{{
+                        obj.product_details.product_name
+                      }}</a>
+                    </div>
+                    <div class="_20RCA6">
+                      {{ obj.product_details.product_slug_url }}
+                    </div>
+                    <span class="_2-ut7f _2xc6hH"
+                      >₹ {{ obj.product_details.mrp_price }}</span
+                    ><span class="_2-ut7f _1WpvJ7"
+                      >₹ {{ obj.product_details.offer_price }}</span
+                    >
+                    <!-- <span class="dML6Ak">16% Off</span> -->
+                  </div>
+                  <div class="_2zbf83">
+                    <ul class="_31bLAK"></ul>
+                  </div>
+                </div>
+                <div class="nZz3kj _1hNI6F">
+                  <div class="_1uc2IE">
+                    <div class="_3dY_ZR">
+                      <button class="_23FHuj" disabled="">–</button>
+                      <div class="_26HdzL _3UDv-f">
+                        <input
+                          type="text"
+                          class="_253qQJ"
+                          disabled=""
+                          value="1"
+                        />
+                      </div>
+                      <button class="_23FHuj" disabled="">+</button>
+                    </div>
+                  </div>
+                  <div class="_10vWcL td-FUv WDiNrH">
+                    <div class="_3dsJAO" (click)="movetocart(obj)">
+                      Move to cart
+                    </div>
+                    <div class="_3dsJAO">Remove</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="_1YokD2 _3Mn1Gg col-4-12 _78xt5Y"
+          style="padding: 0px 0px 0px 16px"
+        >
+          <div class="_1AtVbE col-12-12">
+            <div class="dimARw">
+              <div class="_35mLK5">
+                <span class="_3aPjap">Price details</span>
+                <div class="_I_XQO">
+                  <div class="_1MaUCb">
+                    <div class="_2SabxT">
+                      <div class="nxl3SA">
+                        Price ( {{ cartdetails.cart_list.length }} )
+                      </div>
+                      <div class="nxl3SA">
+                        Price ( {{ cartdetails.cart_list.length }} )
+                      </div>
+                    </div>
+                    <div>
+                      <span class="_1YQFQF"
+                        >₹ {{ cartdetails.grand_total }}</span
+                      >
+                    </div>
+                  </div>
+                  <div class="_1MaUCb">
+                    <div class="_2SabxT">
+                      <div class="nxl3SA">Discount</div>
+                    </div>
+                    <div>
+                      <span class="_1YQFQF"
+                        ><span class="_3qPnhZ">− ₹ 0</span></span
+                      >
+                    </div>
+                  </div>
+                  <div class="_1MaUCb">
+                    <div class="_2SabxT">
+                      <div class="nxl3SA">Delivery Charges</div>
+                    </div>
+                    <div>
+                      <span class="_1YQFQF"
+                        ><span class="_3qPnhZ"
+                          >₹ {{ cartdetails.delivery_charge }}</span
+                        ></span
+                      >
+                    </div>
+                  </div>
+                  <div class="_1MaUCb">
+                    <div class="_2SabxT">
+                      <div class="nxl3SA">Secured Packaging Fee</div>
+                    </div>
+                    <div><span class="_1YQFQF">₹ 0</span></div>
+                  </div>
+                  <div class="_3LxTgx">
+                    <div class="Ob17DV">
+                      <div class="_24KATy">
+                        <div class="_2npqm0">Total Amount</div>
+                      </div>
+                      <div class="z4Ha90">
+                        <span>
+                          <div class="_1dqRvU">
+                            <div class="Ob17DV _3X7Jj1">
+                              <div class="_24KATy">
+                                <div class="_2npqm0"></div>
+                              </div>
+                              <div class="z4Ha90">
+                                <span> ₹ {{ cartdetails.grand_total }}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="_3s5O6i">You will save ₹ 0 on this order</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="_1YokD2 _3Mn1Gg col-12-12" style="padding: 20px 0px 0px">
+            <div class="_1AtVbE col-12-12">
+              <div class="_124baV">
+                <div class="_1RVm3P">
+                  Safe and Secure Payments.Easy returns.100% Authentic products.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

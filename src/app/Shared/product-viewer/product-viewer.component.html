@@ -1,0 +1,11 @@
+<!-- product-viewer.component.html -->
+<div class="product-viewer">
+  <div class="image-list">
+    <div *ngFor="let image of images" (click)="showImage(image)">
+      <img [src]="image" alt="Product Image">
+    </div>
+  </div>
+  <div class="main-image">
+    <img [src]="currentImage" alt="Main Product Image">
+  </div>
+</div>

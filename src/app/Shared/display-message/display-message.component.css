@@ -1,0 +1,19 @@
+.toaster {
+  position: fixed;
+  bottom: 0; /* Change 'bottom' to 'top' */
+  margin-bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  z-index: 9999; /* Set a high z-index value to ensure it appears on top */
+}
+
+.success {
+  background-color: rgb(64, 233, 64);
+}
+
+.error {
+  background-color: red;
+}

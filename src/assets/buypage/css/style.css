@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Manrope';
+
+}
+body{
+    background-color: #fffaee;
+
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 40px;
+    background: #C9D1FF;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    height: 77px;
+}
+.logo{
+    position: absolute;
+    left: 70px;
+}
+.user-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right:40px;
+    gap: 20px;
+}
+.fa-user{
+color: #FFFFFF;
+background-color: #4003a3;
+font-size: 20px;
+text-align: center;
+padding: 7px 8px;
+border-radius: 50%;
+}
+.back{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-family: 'Outfit';
+    font-style: normal;
+   
+    font-size: 22px;
+    line-height: 30px;
+    color: #000000;
+    gap: 10px;
+    margin-left: 5px;
+
+}
+#input-field{
+    outline: none;
+    border: 0;
+    position: relative;
+    left: 20px;
+    padding: 5px 20px;
+    margin-top: 10px;
+    border-radius: 10%;
+    
+}
+/* hero section right */
+.hero-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+   position: relative;
+   top: 40px;
+}
+.hero-section-left{
+   width:854px;
+}
+/* delevery address */
+.dlv-address,.order-summary {
+    width: 833px;
+    height: 71px;
+    background: #FEF1D7;
+    padding: 10px;
+}
+/* choose delevery address */
+.hero-section-right .para{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 579px;
+    height: 93px;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    gap: 20px;
+}
+input[type="radio"]{
+    accent-color: #FFBF3F;
+
+}
+.horizontal{
+    background-color: #FFBF3F;
+    color: #FFBF3F;
+    width: 833px;
+    height: 1px;
+}
+.dlv-btn{
+    position: absolute;
+    width: 200px;
+    height: 40px;
+    left: 608px;
+    top: 195px;
+    border: 0;
+    background: #FFBF3F;
+    border-radius: 14px;
+    
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #000000;
+}
+.dlv-btn:hover{
+    color: #ffffff;
+    background: #0000ff;
+}
+/* hero section left */
+.hero-section-left{
+   margin-left: 10px;
+   border: 1px solid #fee8bc;;
+   padding: 10px 10px;
+   position: relative;
+   bottom: 435px;
+   
+
+   /* width: 300px; */
+}
+.hero-section-left .price-details{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    height: 71px;
+}
+.horizontal-left{
+    border: 1px solid #1E1E1E;
+    margin-bottom: 10px;
+    
+}
+.order-summary{
+    margin-top: 20px;
+}
+/* order-summary-details */
+.order-summary-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../assets/Rectangle\ 117.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-origin: border-box;
+    width:854px;
+    height: 200px;
+    line-height: 30px;
+   
+    
+   
+}
+.order-summary-details-price{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+    position: relative;
+    width: 240px;
+    height: 51px;
+    left: 120px;
+    bottom: 20px;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 30px;
+    color: #000000;
+   
+  
+  
+}
+.order-summary-details-price,p,span{
+    margin-top: 20px;
+    display: flex;
+   align-items: start;
+   justify-content: space-around;
+   flex-direction: column;
+   /* row-gap: 40px; */
+   column-gap: 20px;
+   font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+}
+/* colimn-2 */
+.summary-heading,span{
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 30px;
+}
+.col2-price{
+    color:#3900B4;
+}
+.order-summary-details-price .col-3{
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+}
+.delavery-details{
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin-left: 20px;
+
+}
+.delavery-details span{
+
+    font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+
+color: #0FB900;
+}
+.cr{
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    top: -30px;
+}
+.col-3-span{
+    position: relative;
+    top: -40px;
+    left: 195px;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: #0FB900;
+}
+#quantity-inp{
+    outline: none;
+    border: 0;
+    width: 90.9px;
+    height: 38.36px;
+    background-color: #fff;
+    font-size: x-large;
+    padding: 5px;
+    border-radius: 20%;
+    text-align: center;
+    margin: 10px;
+}
+.fa{
+   text-align: center;
+    background-color: #eeeeee;
+    border-radius: 50%;
+    padding: 6px 8px;
+    color: #373737;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight:900;
+}
+.horizontal-2{
+    background-image: url("../assets/Rectangle\ 128.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-origin: border-box;
+    width:805px;
+    height: 71px;
+    line-height: 30px;
+    accent-color:#FFBF3F ;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+.order-confirm{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+
+   
+}
+.order-confirm-btn{ 
+width: 167px;
+height: 40px;
+position: relative;
+right: 50px;
+top: 10px;
+background: #FFBF3F;
+border-radius: 14px;
+outline: none;
+border: 0;
+font-family: 'Outfit';
+font-style: normal;
+font-weight: 900;
+font-size: 19px;
+line-height: 20px;
+text-align: center;
+color: #000000;
+margin-bottom: 20px;
+}
+.order-confirm-btn{
+    color: #ffffff;
+    background-color: #0000ff;
+}
+/* hero-left-section-loanCat */
+ .hero-left-section-loanCat{
+    position: absolute;
+    right: 0px;
+    top: 370px;
+    width: 465px;
+ 
+    height: 270px;
+    margin-left: 10px;
+    border: 1px solid #fee8bc;
+    padding: 10px 10px;
+
+}
+#view-offers,.options{
+    margin-top: 20px;
+    border: 0;
+    outline: 0;
+}
+/* footer section */
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    top: 50px;
+    color: #FFFFFF;
+    background: #2F3191;
+    padding: 10px 10px;
+    font-family: 'Outfit';
+}

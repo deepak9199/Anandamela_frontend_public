@@ -1,0 +1,1740 @@
+<!-- main -->
+<div class="container" id="checkout_summery">
+  <div class="my-md-2" style="display: flex; justify-content: space-between">
+    <nav aria-label="breadcrumb" style="width: 100%">
+      <ol
+        class="breadcrumb mb-0 mb-lg-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+        style="display: flex; justify-content: space-between; width: 100%"
+      >
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/']">
+            <i class="fa fa-home" style="margin-right: 5px"></i>Home</a
+          >
+        </li>
+        <li class="breadcrumb-item">
+          <a onclick="window.history.back()"><i class="fa fa-arrow-left" style="margin-right: 5px;"></i>Back</a>
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <!-- loading -->
+  <div
+    style="
+      height: 700px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+    *ngIf="loading"
+  >
+    <app-loading></app-loading>
+  </div>
+  <!-- after loading -->
+  <div *ngIf="!loading" class="row">
+    <div class="col-lg-9 mb-3">
+      <div class="row">
+        <!-- login heading-->
+        <div class="col-md-12">
+          <div class="border-bottom border-color-1 mb-0">
+            <div class="row justify-content-between">
+              <div class="col-auto col-md-6 align-self-end">
+                <h3
+                  class="section-title section-title__sm mb-0 pb-2 font-size-16 font-weight-bold"
+                >
+                  <i class="fa fa-check-circle text-green font-size-20"></i>
+                  Login
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- login user name -->
+        <div class="col-md-12 mb-5">
+          <div class="py-3 pr-0 border-bottom">
+            <div class="row">
+              <div class="col-6 col-md-4">
+                <h5 class="font-size-16 font-weight-bold">
+                  {{ userDetail.name }}
+                </h5>
+              </div>
+              <div class="col-6 col-md-4">
+                <h5 class="font-size-16 font-weight-bold">
+                  {{ userDetail.phone }}
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- address -->
+        <div class="col-md-12 mb-5">
+          <div class="border-bottom border-color-1 mb-3">
+            <div class="row justify-content-between">
+              <div class="col-7 col-md-6">
+                <h3
+                  class="section-title section-title__sm mb-0 pb-2 font-size-16 font-weight-bold"
+                >
+                  <i
+                    class="fa fa-check-circle text-green font-size-20 orderSummary-selected-address"
+                    data-target-group="checkout-group"
+                    style="opacity: 0; display: none"
+                  >
+                  </i>
+                  Billing &amp; Shipping address
+                </h3>
+              </div>
+              <div class="col-auto col-md-6 text-right">
+                <a
+                  href="javascript:;"
+                  class="text-blue font-size-16 font-weight-bold js-animation-link manage-address manage-address-list animated slideInUp"
+                  data-target="#addNewAddress"
+                  data-link-group="checkout-group"
+                  data-animation-in="slideInUp"
+                  data-target-group="checkout-group"
+                  style="opacity: 1"
+                  (click)="addnewaddress()"
+                  >Add New Address
+                </a>
+
+                <a
+                  class="text-blue font-weight-bold font-size-16 js-animation-link orderSummary-selected-address active"
+                  data-target=".manage-address"
+                  data-link-group="checkout-group"
+                  data-animation-in="slideInUp"
+                  href="javascript:;"
+                  style="opacity: 0; display: none"
+                  data-target-group="checkout-group"
+                >
+                  Change
+                </a>
+              </div>
+            </div>
+          </div>
+          <!--- Guest address form -------------------------->
+          <form
+            *ngIf="saveaddress"
+            class="border-bottom border-color-1 pb-5 animated slideInUp"
+            id="addNewAddress"
+            novalidate="novalidate"
+            style="opacity: 1"
+            data-target-group="checkout-group"
+          >
+            <input
+              type="hidden"
+              name="csrfmiddlewaretoken"
+              value="Hku4ang48iPJQ1T6lg0oQltSYqUCqV1vHBF7blwUSuSUf8MzGRljIs07IBrNCvxX"
+            />
+            <div class="form-row">
+              <div class="js-form-message col-md-6 mb-2 mb-lg-5">
+                <label class="form-label" for="Address2"
+                  >Address/Area/Street/Sector
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="addaddressform.address"
+                  name="address2"
+                  id="Address2"
+                  placeholder=""
+                  aria-label="Name"
+                  data-msg="Please enter Flat/House/Floor/Building"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                />
+              </div>
+              <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                <label class="form-label" for="Landmark"
+                  >Landmark
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="landmark"
+                  [(ngModel)]="addaddressform.landmark"
+                  id="Landmark"
+                  placeholder=""
+                  aria-label="Landmark"
+                  required=""
+                  data-msg="Please enter a valid Landmark"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                />
+              </div>
+
+              <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                <label class="form-label" for="Pincode"
+                  >Pincode
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="pincode"
+                  id="Pincode"
+                  placeholder=""
+                  [(ngModel)]="addaddressform.pincode"
+                  aria-label="Pincode"
+                  required=""
+                  data-msg="Please enter a valid your area Pin-code"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                />
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <div
+                  id="addshopCartHeadingFour"
+                  class="custom-control custom-checkbox d-flex align-items-center"
+                >
+                  <label
+                    class="custom-control-label form-label"
+                    for="addbillingdiffrentAddress"
+                  >
+                    Billing address same as shipping address?
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div id="addbillingAddress" class="mt-3 mb-3" style="display: none">
+              <div class="form-row">
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="BillingUserName"
+                    >Name
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_name"
+                    id="addBillingUserName"
+                    placeholder="Enter your name"
+                    aria-label="Name"
+                    data-msg="Please enter a valid your name"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="addBillingAddressMobile"
+                    >Mobile
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    name="billing_address_mobile_no"
+                    id="addBillingAddressMobile"
+                    maxlength="10"
+                    minlength="10"
+                    placeholder="Enter your mobile number"
+                    aria-label="Mobile"
+                    data-msg="Please enter a valid your mobile number"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="addBillingAddressName"
+                    >Email
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="billing_address_email"
+                    id="addBillingAddressName"
+                    placeholder="Enter your email"
+                    aria-label="Email"
+                    data-msg="Please enter a valid your email"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-md-6 mb-2 mb-lg-5">
+                  <label class="form-label" for="addBillingAddress1"
+                    >Flat/House/Floor/Building
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_address_line1"
+                    id="addBillingAddress1"
+                    placeholder=""
+                    aria-label="Name"
+                    data-msg="Please enter Flat/House/Floor/Building"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-md-6 mb-2 mb-lg-5">
+                  <label class="form-label" for="addBillingAddress2"
+                    >Area/Street/Sector
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_address_line2"
+                    id="addBillingAddress2"
+                    placeholder=""
+                    aria-label="Name"
+                    data-msg="Please enter Flat/House/Floor/Building"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="addBillingLandmark"
+                    >Landmark
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_landmark"
+                    id="addBillingLandmark"
+                    placeholder=""
+                    aria-label="Landmark"
+                    data-msg="Please enter a valid Landmark"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="addBillingPincode"
+                    >Pincode
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_pincode"
+                    id="addBillingPincode"
+                    placeholder=""
+                    aria-label="Pincode"
+                    data-msg="Please enter a valid your area Pin-code"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="addBillingState"
+                    >State
+                    <span class="text-danger">*</span>
+                  </label>
+                  <select
+                    class="form-control"
+                    name="billing_address_state_id"
+                    id="addBillingState"
+                    placeholder=""
+                    aria-label="State"
+                    data-msg="Please enter a valid state name"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  >
+                    <option value="">Select State</option>
+
+                    <option value="1">WEST BENGAL</option>
+
+                    <option value="2">ODISHA</option>
+
+                    <option value="3">RAJASTHAN</option>
+
+                    <option value="4">UTTAR PRADESH</option>
+
+                    <option value="5">ANDHRA PRADESH</option>
+
+                    <option value="7">HARYANA</option>
+                  </select>
+                </div>
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="addBillingCity"
+                    >City
+                    <span class="text-danger">*</span>
+                  </label>
+
+                  <select
+                    class="form-control"
+                    name="billing_address_city_id"
+                    id="addBillingCity"
+                    placeholder=""
+                    aria-label="City"
+                    data-msg="Please enter a valid City name"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  ></select>
+                </div>
+                <div
+                  class="js-form-message col-md-8 mb-2 mb-lg-5 align-self-end pb-2"
+                >
+                  <div
+                    class="custom-control custom-radio custom-control-inline"
+                  >
+                    <input
+                      type="radio"
+                      id="11"
+                      name="customRadioInline2"
+                      class="custom-control-input"
+                      value="1"
+                    />
+                    <label class="custom-control-label" for="11">Home</label>
+                  </div>
+
+                  <div
+                    class="custom-control custom-radio custom-control-inline"
+                  >
+                    <input
+                      type="radio"
+                      id="21"
+                      name="customRadioInline2"
+                      class="custom-control-input"
+                      value="2"
+                    />
+                    <label class="custom-control-label" for="21">Office</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-light px-xl-10 mr-3 js-animation-link"
+              data-target=".manage-address-list"
+              data-link-group="checkout-group"
+              data-animation-in="slideInUp"
+              (click)="cancleaddress()"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              name="submit"
+              class="btn btn-primary-dark-w px-xl-10"
+              (click)="addaddress()"
+            >
+              Save
+            </button>
+          </form>
+          <!--- User is login address form ------------------>
+          <div *ngIf="!saveaddress">
+            <div
+              *ngIf="selectedaddressaddress == ''"
+              class="manage-address manage-address-list animated slideInUp"
+              data-target-group="checkout-group"
+              id="addressList"
+              style="opacity: 1"
+            >
+              <!-- address -->
+              <div class="row" *ngFor="let obj of addressData">
+                <div class="col-md-4 mb-3">
+                  <div class="card address-card">
+                    <div class="card-body">
+                      <div class="row justify-content-between">
+                        <div class="col-auto">
+                          <p class="text-uppercase text-danger"></p>
+                        </div>
+
+                        <div class="col-auto">
+                          <a
+                            class="edit-billing-shipping-address text-blue text-uppercase js-animation-link"
+                            type="button"
+                            data-target="#edit-billing-shipping-address"
+                            data-link-group="checkout-group"
+                            data-animation-in="slideInUp"
+                            data-object-id="8247"
+                            (click)="deleteaddress(obj)"
+                          >
+                            delete
+                          </a>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-6">
+                          <h5 class="text-blue font-weight-bold text-uppercase">
+                            Shipping Address
+                          </h5>
+                          <div class="text-dark">
+                            <p class="mb-2">{{ obj.address }}<br /></p>
+                            <p></p>
+                          </div>
+                          <hr class="d-md-block d-none" />
+                        </div>
+                        <div class="col-md-12 col-6">
+                          <h5 class="text-blue font-weight-bold text-uppercase">
+                            Billing Address
+                          </h5>
+                          <div class="text-dark">
+                            <p class="mb-2">{{ obj.address }}<br /></p>
+                            <p></p>
+                          </div>
+                          <hr class="d-md-block d-none" />
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        data-object-id="8247"
+                        class="btn btn-sm btn-block btn-outline-black btn-wide transition-3d-hover borders-radius-10 js-animation-link select-billing-shipping-address"
+                        data-target=".orderSummary-selected-address"
+                        data-link-group="checkout-group"
+                        data-animation-in="slideInUp"
+                        (click)="seletedaddress(obj)"
+                      >
+                        Deliver Here
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form
+            class="border-bottom border-color-1 pb-5 updateaddress"
+            id="edit-billing-shipping-address"
+            style="display: none; opacity: 0"
+            data-target-group="checkout-group"
+            novalidate="novalidate"
+          >
+            <input
+              type="hidden"
+              name="csrfmiddlewaretoken"
+              value="Hku4ang48iPJQ1T6lg0oQltSYqUCqV1vHBF7blwUSuSUf8MzGRljIs07IBrNCvxX"
+            />
+            <input type="hidden" name="edit_address_id" />
+            <div class="form-row edit-address-section">
+              <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                <label class="form-label" for="AddressName"
+                  >Name
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  id="AddressName"
+                  placeholder="Enter your name"
+                  aria-label="Name"
+                  required=""
+                  data-msg="Please enter a valid your name"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                />
+              </div>
+
+              <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                <label class="form-label" for="AddressMobile"
+                  >Mobile
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  maxlength="10"
+                  minlength="10"
+                  name="mmobile"
+                  id="AddressMobile"
+                  placeholder="Enter your mobile number"
+                  aria-label="Mobile"
+                  required=""
+                  data-msg="Please enter a valid your mobile number"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                />
+              </div>
+              <div class="js-form-message col-md-4 mb-2 mb-lg-5">
+                <label class="form-label" for="AddressName"
+                  >Email
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  id="AddressName"
+                  placeholder="Enter your email"
+                  aria-label="Email"
+                  required=""
+                  data-msg="Please enter a valid your email"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                  value=""
+                />
+              </div>
+              <div class="js-form-message col-md-6 mb-2 mb-lg-5">
+                <label class="form-label" for="Address1"
+                  >Flat/House/Floor/Building
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="address"
+                  id="Address1"
+                  placeholder=""
+                  aria-label="Name"
+                  required=""
+                  data-msg="Please enter Flat/House/Floor/Building"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                />
+              </div>
+              <div class="js-form-message col-md-6 mb-2 mb-lg-5">
+                <label class="form-label" for="Address2"
+                  >Area/Street/Sector
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="address2"
+                  id="Address2"
+                  placeholder=""
+                  aria-label="Name"
+                  data-msg="Please enter Flat/House/Floor/Building"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                />
+              </div>
+              <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                <label class="form-label" for="Landmark"
+                  >Landmark
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="landmark"
+                  id="Landmark"
+                  placeholder=""
+                  aria-label="Landmark"
+                  required=""
+                  data-msg="Please enter a valid Landmark"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                />
+              </div>
+
+              <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                <label class="form-label" for="Pincode"
+                  >Pincode
+                  <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="Pincode"
+                  id="Pincode"
+                  placeholder=""
+                  aria-label="Pincode"
+                  required=""
+                  data-msg="Please enter a valid your area Pin-code"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                />
+              </div>
+              <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                <label class="form-label" for="State"
+                  >State
+                  <span class="text-danger">*</span>
+                </label>
+                <select
+                  class="form-control"
+                  name="state"
+                  id="editstate"
+                  placeholder=""
+                  aria-label="State"
+                  required=""
+                  data-msg="Please enter a valid state name"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                >
+                  <option value="">Select State</option>
+
+                  <option value="1">WEST BENGAL</option>
+
+                  <option value="2">ODISHA</option>
+
+                  <option value="3">RAJASTHAN</option>
+
+                  <option value="4">UTTAR PRADESH</option>
+
+                  <option value="5">ANDHRA PRADESH</option>
+
+                  <option value="7">HARYANA</option>
+                </select>
+              </div>
+              <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                <label class="form-label" for="City"
+                  >City
+                  <span class="text-danger">*</span>
+                </label>
+                <select
+                  class="form-control city"
+                  name="city"
+                  id="editcity"
+                  placeholder=""
+                  aria-label="City"
+                  required=""
+                  data-msg="Please enter a valid City name"
+                  data-error-class="u-has-error"
+                  data-success-class="u-has-success"
+                >
+                  <option value="232">BANKURA</option>
+
+                  <option value="233">BARDHAMAN</option>
+
+                  <option value="234">BIRBHUM</option>
+
+                  <option value="235">COOCH BEHAR</option>
+
+                  <option value="236">DARJILING</option>
+
+                  <option value="237">EAST MIDNAPORE</option>
+
+                  <option value="238">HOOGHLY</option>
+
+                  <option value="239">HOWRAH</option>
+
+                  <option value="240">JALPAIGURI</option>
+
+                  <option value="241">KOLKATA</option>
+
+                  <option value="242">MALDA</option>
+
+                  <option value="243">MEDINIPUR</option>
+
+                  <option value="244">JAIPUR</option>
+
+                  <option value="245">JODHPUR</option>
+
+                  <option value="246">SIKAR</option>
+
+                  <option value="247">KOTA</option>
+
+                  <option value="248">VARANASI</option>
+
+                  <option value="249">LUCKNOW</option>
+
+                  <option value="250">VIZAG</option>
+
+                  <option value="251">VIJAYWADA</option>
+
+                  <option value="252">ANGUL</option>
+
+                  <option value="253">BALANGIR</option>
+
+                  <option value="254">BALESWAR</option>
+
+                  <option value="255">BARGARH</option>
+
+                  <option value="256">BHADRAK</option>
+
+                  <option value="257">KENDUJHAR</option>
+
+                  <option value="258">KHORDA</option>
+
+                  <option value="259">KORAPUT</option>
+
+                  <option value="260">MALKANGIRI</option>
+
+                  <option value="261">MAYURBHANJ</option>
+
+                  <option value="262">NABARANGAPUR</option>
+
+                  <option value="263">NAYAGARH</option>
+
+                  <option value="264">NUAPADA</option>
+
+                  <option value="265">PURI</option>
+
+                  <option value="266">RAYAGADA</option>
+
+                  <option value="267">SAMBALPUR</option>
+
+                  <option value="268">SONAPUR</option>
+
+                  <option value="269">SUNDERGARH</option>
+
+                  <option value="270">ASANSOL</option>
+
+                  <option value="271">NORTH 24 PARGANA</option>
+
+                  <option value="272">SURI</option>
+
+                  <option value="273">BALASORE</option>
+
+                  <option value="274">BARASAT</option>
+
+                  <option value="275">HALDIA</option>
+
+                  <option value="276">BURDWAN</option>
+
+                  <option value="277">NADIA</option>
+
+                  <option value="278">CUTTACK</option>
+
+                  <option value="279">ROURKELA</option>
+
+                  <option value="280">JAJPUR</option>
+
+                  <option value="281">BHUBANESWAR</option>
+
+                  <option value="282">BRAHMAPUR</option>
+
+                  <option value="283">SOUTH 24 PARGANA</option>
+
+                  <option value="284">DELHI</option>
+
+                  <option value="288">GURGAON</option>
+                </select>
+              </div>
+              <div
+                class="js-form-message col-md-8 mb-2 mb-lg-5 align-self-end pb-2"
+              >
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input
+                    required=""
+                    type="radio"
+                    id="1add-type"
+                    name="edit_address_type"
+                    class="custom-control-input"
+                    value="1"
+                  />
+                  <label class="custom-control-label" for="1add-type"
+                    >Home
+                  </label>
+                </div>
+
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input
+                    required=""
+                    type="radio"
+                    id="2add-type"
+                    name="edit_address_type"
+                    class="custom-control-input"
+                    value="2"
+                  />
+                  <label class="custom-control-label" for="2add-type"
+                    >Office
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-12 mb-3">
+                <div
+                  id="shopCartHeadingFour"
+                  class="custom-control custom-checkbox d-flex align-items-center"
+                >
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="billingdiffrentAddress"
+                    name="editbillingdiffrentAddress"
+                  />
+                  <label
+                    class="custom-control-label form-label"
+                    for="billingdiffrentAddress"
+                  >
+                    Billing address same as shipping address?
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div id="billingAddress" class="mt-3 mb-3" style="display: none">
+              <div class="form-row">
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="BillingUserName"
+                    >Name
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_name"
+                    id="BillingUserName"
+                    placeholder="Enter your name"
+                    aria-label="Name"
+                    required=""
+                    data-msg="Please enter a valid your name"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="BillingAddressMobile"
+                    >Mobile
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    name="billing_address_mobile_no"
+                    id="BillingAddressMobile"
+                    maxlength="10"
+                    minlength="10"
+                    placeholder="Enter your mobile number"
+                    aria-label="Mobile"
+                    required=""
+                    data-msg="Please enter a valid your mobile number"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="BillingAddressName"
+                    >Email
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="billing_address_email"
+                    id="BillingAddressName"
+                    placeholder="Enter your email"
+                    aria-label="Email"
+                    required=""
+                    data-msg="Please enter a valid your email"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-md-6 mb-2 mb-lg-5">
+                  <label class="form-label" for="BillingAddress1">
+                    Flat/House/Floor/Building
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_address_line1"
+                    id="BillingAddress1"
+                    placeholder=""
+                    aria-label="Name"
+                    required=""
+                    data-msg="Please enter Flat/House/Floor/Building"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-md-6 mb-2 mb-lg-5">
+                  <label class="form-label" for="BillingAddress2"
+                    >Area/Street/Sector
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_address_line2"
+                    id="BillingAddress2"
+                    placeholder=""
+                    aria-label="Name"
+                    data-msg="Please enter Flat/House/Floor/Building"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="BillingLandmark"
+                    >Landmark
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_landmark"
+                    id="BillingLandmark"
+                    placeholder=""
+                    aria-label="Landmark"
+                    required=""
+                    data-msg="Please enter a valid Landmark"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="BillingPincode"
+                    >Pincode
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="billing_address_pincode"
+                    id="BillingPincode"
+                    placeholder=""
+                    aria-label="Pincode"
+                    required=""
+                    data-msg="Please enter a valid your area Pin-code"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  />
+                </div>
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="billing_address_state_id"
+                    >State
+                    <span class="text-danger">*</span>
+                  </label>
+                  <select
+                    class="form-control"
+                    name="billing_address_state_id"
+                    id="billing_address_state_id"
+                    placeholder=""
+                    aria-label="State"
+                    data-msg="Please enter a valid state name"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  >
+                    <option value="">Select State</option>
+
+                    <option value="1">WEST BENGAL</option>
+
+                    <option value="2">ODISHA</option>
+
+                    <option value="3">RAJASTHAN</option>
+
+                    <option value="4">UTTAR PRADESH</option>
+
+                    <option value="5">ANDHRA PRADESH</option>
+
+                    <option value="7">HARYANA</option>
+                  </select>
+                </div>
+                <div class="js-form-message col-6 col-md-4 mb-2 mb-lg-5">
+                  <label class="form-label" for="billing_address_city_id"
+                    >City
+                    <span class="text-danger">*</span>
+                  </label>
+                  <select
+                    class="form-control"
+                    name="billing_address_city_id"
+                    id="billing_address_city_id"
+                    placeholder=""
+                    aria-label="City"
+                    data-msg="Please enter a valid City name"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                  >
+                    <option value="232">BANKURA</option>
+
+                    <option value="233">BARDHAMAN</option>
+
+                    <option value="234">BIRBHUM</option>
+
+                    <option value="235">COOCH BEHAR</option>
+
+                    <option value="236">DARJILING</option>
+
+                    <option value="237">EAST MIDNAPORE</option>
+
+                    <option value="238">HOOGHLY</option>
+
+                    <option value="239">HOWRAH</option>
+
+                    <option value="240">JALPAIGURI</option>
+
+                    <option value="241">KOLKATA</option>
+
+                    <option value="242">MALDA</option>
+
+                    <option value="243">MEDINIPUR</option>
+
+                    <option value="244">JAIPUR</option>
+
+                    <option value="245">JODHPUR</option>
+
+                    <option value="246">SIKAR</option>
+
+                    <option value="247">KOTA</option>
+
+                    <option value="248">VARANASI</option>
+
+                    <option value="249">LUCKNOW</option>
+
+                    <option value="250">VIZAG</option>
+
+                    <option value="251">VIJAYWADA</option>
+
+                    <option value="252">ANGUL</option>
+
+                    <option value="253">BALANGIR</option>
+
+                    <option value="254">BALESWAR</option>
+
+                    <option value="255">BARGARH</option>
+
+                    <option value="256">BHADRAK</option>
+
+                    <option value="257">KENDUJHAR</option>
+
+                    <option value="258">KHORDA</option>
+
+                    <option value="259">KORAPUT</option>
+
+                    <option value="260">MALKANGIRI</option>
+
+                    <option value="261">MAYURBHANJ</option>
+
+                    <option value="262">NABARANGAPUR</option>
+
+                    <option value="263">NAYAGARH</option>
+
+                    <option value="264">NUAPADA</option>
+
+                    <option value="265">PURI</option>
+
+                    <option value="266">RAYAGADA</option>
+
+                    <option value="267">SAMBALPUR</option>
+
+                    <option value="268">SONAPUR</option>
+
+                    <option value="269">SUNDERGARH</option>
+
+                    <option value="270">ASANSOL</option>
+
+                    <option value="271">NORTH 24 PARGANA</option>
+
+                    <option value="272">SURI</option>
+
+                    <option value="273">BALASORE</option>
+
+                    <option value="274">BARASAT</option>
+
+                    <option value="275">HALDIA</option>
+
+                    <option value="276">BURDWAN</option>
+
+                    <option value="277">NADIA</option>
+
+                    <option value="278">CUTTACK</option>
+
+                    <option value="279">ROURKELA</option>
+
+                    <option value="280">JAJPUR</option>
+
+                    <option value="281">BHUBANESWAR</option>
+
+                    <option value="282">BRAHMAPUR</option>
+
+                    <option value="283">SOUTH 24 PARGANA</option>
+
+                    <option value="284">DELHI</option>
+
+                    <option value="288">GURGAON</option>
+                  </select>
+                </div>
+                <div
+                  class="js-form-message col-md-8 mb-2 mb-lg-5 align-self-end pb-2"
+                >
+                  <div
+                    class="custom-control custom-radio custom-control-inline"
+                  >
+                    <input
+                      type="radio"
+                      id="1billing-add-type"
+                      name="billing_address_type_id"
+                      class="custom-control-input"
+                      value="1"
+                    />
+                    <label class="custom-control-label" for="1billing-add-type">
+                      Home
+                    </label>
+                  </div>
+
+                  <div
+                    class="custom-control custom-radio custom-control-inline"
+                  >
+                    <input
+                      type="radio"
+                      id="2billing-add-type"
+                      name="billing_address_type_id"
+                      class="custom-control-input"
+                      value="2"
+                    />
+                    <label class="custom-control-label" for="2billing-add-type">
+                      Office
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-light px-xl-10 mr-3 js-animation-link"
+              data-target=".manage-address-list"
+              data-link-group="checkout-group"
+              data-animation-in="slideInUp"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              name="submit"
+              class="btn btn-primary-dark-w px-xl-10"
+            >
+              Save
+            </button>
+          </form>
+          <div
+            *ngIf="selectedaddressaddress != ''"
+            class="orderSummary-selected-address animated slideInUp"
+            data-target-group="checkout-group"
+            id="selectedbillingaddress"
+            style="opacity: 1"
+          >
+            <div class="row">
+              <div class="col-md-12 mb-1">
+                <h6 class="font-size-14" id="shipping-address-checkout">
+                  <span class="font-weight-bold text-blue-2"
+                    >Shipping Address :</span
+                  >
+                  {{ selectedaddressaddress }}
+                </h6>
+              </div>
+              <div class="col-md-12">
+                <h6 class="font-size-14" id="billing-address-checkout">
+                  <span class="font-weight-bold text-red-2"
+                    >Sorry! Delivery is not serviceable in your area.</span
+                  >
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- coupan apply-->
+        <div class="mb-5">
+          <div class="border-bottom border-color-1 mb-3">
+            <h3
+              class="section-title section-title__sm mb-0 pb-2 font-size-18 font-weight-bold"
+            >
+              Coupon Codes
+            </h3>
+          </div>
+
+          <label class="sr-only" for="subscribeSrEmailExample1"
+            >Coupon code</label
+          >
+          <div class="input-group">
+            <input
+              #codecoupon
+              type="text"
+              class="form-control"
+              name="coupon_code"
+              id="Coupon"
+              [value]="codecouponvar"
+              placeholder="Enter Coupon Code"
+              aria-label="Coupon code"
+              aria-describedby="applyCoupon"
+              [disabled]="couponCodeApplyed"
+            />
+            <div class="input-group-append">
+              <button
+                *ngIf="!couponCodeApplyed"
+                (click)="applycouponcode(codecoupon.value)"
+                class="btn btn-block btn-dark px-4"
+                type="button"
+                id="applyCoupon"
+              >
+                <i class="fas fa-tags d-md-none"></i>
+                <span class="d-none d-md-inline">Apply </span>
+              </button>
+              <button
+                *ngIf="couponCodeApplyed"
+                (click)="removecouponcode()"
+                class="btn btn-block btn-dark px-4"
+                type="button"
+                id="applyCoupon"
+              >
+                <i class="fas fa-tags d-md-none"></i>
+                <span class="d-none d-md-inline">Apply </span>
+              </button>
+            </div>
+          </div>
+          <div id="appliedMessage"></div>
+        </div>
+        <!-- order summar -->
+        <div
+          class="col-md-12 mb-3 mb-lg-5"
+          *ngIf="selectedaddressaddress != ''"
+        >
+          <div class="order-summary-section">
+            <div class="border-bottom border-color-1 mb-0">
+              <h3
+                class="section-title section-title__sm mb-0 pb-2 font-size-16 font-weight-bold"
+              >
+                Order Summary
+              </h3>
+            </div>
+            <div
+              class="cart-table border-bottom-0 orderSummary-selected-address animated slideInUp"
+              id="orderSummary"
+              data-target-group="checkout-group"
+              style="opacity: 1"
+            >
+              <div class="order-product-list-table">
+                <table class="table mb-3" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th class="font-weight-bold">Product Details</th>
+                      <th class="font-weight-bold text-center">Quantity</th>
+                      <th class="font-weight-bold">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="iscart">
+                    <tr *ngFor="let obj of cartDetail.cart_list">
+                      <td>
+                        <div class="product-item__inner remove-prodcut-hover">
+                          <div class="row">
+                            <div class="product-item__header col-4 col-md-4">
+                              <div class="mb-2">
+                                <a class="d-block text-center"
+                                  ><img
+                                    class="height-122 product-cart-img lazy"
+                                    src="{{
+                                      obj.product_details
+                                        .full_default_product_image
+                                    }}"
+                                    alt="Image Description"
+                                    style=""
+                                /></a>
+                              </div>
+                            </div>
+                            <div class="col-8 col-md-8 align-self-center">
+                              <div class="pr-lg-3">
+                                <h6 class="font-size-12 font-size-14-lg">
+                                  <a class="text-blue font-weight-bold">{{
+                                    obj.product_details.product_name
+                                  }}</a>
+                                </h6>
+                                <p class="cart-joy-label mb-1">Our Price</p>
+                                <div class="d-lg-flex cart-product-price">
+                                  <div
+                                    class="text-blue-2 font-size-18 font-weight-bold"
+                                  >
+                                    {{ obj.product_details.offer_price }}
+                                  </div>
+                                  <del
+                                    class="font-size-14 dash-line ml-3 align-self-center"
+                                  >
+                                    {{ obj.product_details.mrp_price }}</del
+                                  >
+                                  <div class="dis-per font-size-14 ml-3">
+                                    30%
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="isbuynow">
+                    <tr>
+                      <td>
+                        <div class="product-item__inner remove-prodcut-hover">
+                          <div class="row">
+                            <div class="product-item__header col-4 col-md-4">
+                              <div class="mb-2">
+                                <a class="d-block text-center">
+                                  <img
+                                    class="height-122 product-cart-img lazy"
+                                    src="{{
+                                      buynow.product.full_default_product_image
+                                    }}"
+                                    alt="Image Description"
+                                    style=""
+                                /></a>
+                              </div>
+                            </div>
+                            <div class="col-8 col-md-8 align-self-center">
+                              <div class="pr-lg-3">
+                                <h6 class="font-size-12 font-size-14-lg">
+                                  <a class="text-blue font-weight-bold">
+                                    {{ buynow.product.product_name }}</a
+                                  >
+                                </h6>
+                                <p class="cart-joy-label mb-1">Our Price</p>
+                                <div class="d-lg-flex cart-product-price">
+                                  <div
+                                    class="text-blue-2 font-size-18 font-weight-bold"
+                                  >
+                                    {{ buynow.product.offer_price }}
+                                  </div>
+                                  <del
+                                    class="font-size-14 dash-line ml-3 align-self-center"
+                                  >
+                                    {{ buynow.product.mrp_price }}</del
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mb-5">
+                <div
+                  class="payment-section mb-0"
+                  style="background-color: rgb(35, 183, 241)"
+                >
+                  <div class="row justify-content-between">
+                    <div class="col-6">
+                      <h3
+                        style=""
+                        class="section-title text-white section-title__sm mb-2 font-size-16 font-weight-bold"
+                      >
+                        Payment Option
+                      </h3>
+                      <div class="font-size-13 text-white">
+                        All transactions are 100% secure and encrypted
+                      </div>
+                      <div class="font-size-13 font-weight-bold text-white">
+                        For cash on delivery, Order amount must be ₹1500 and
+                        more.
+                      </div>
+                    </div>
+                    <div
+                      class="col-auto text-right align-self-end total-amount"
+                    >
+                      <div class="font-size-14 text-white">
+                        Amount to be paid
+                      </div>
+                      <div
+                        *ngIf="hasAttribute(buynow, 'id')"
+                        class="font-size-18 font-weight-bold text-white"
+                      >
+                        {{ buynow.product.offer_price }}
+                      </div>
+                      <div
+                        *ngIf="hasAttribute(buynow, 'id')"
+                        class="font-size-18 font-weight-bold text-white"
+                      >
+                        {{ buynow.product.offer_price }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="cart-table border-bottom-0 orderSummary-selected-address animated slideInUp"
+                  id="orderSummary"
+                  data-target-group="checkout-group"
+                  style="opacity: 1"
+                >
+                  <ul class="list-group payment-options d-flex">
+                    <li
+                      (click)="paycash()"
+                      class="list-group-item d-flex justify-content-between align-items-center py-3"
+                    >
+                      <div class="custom-control custom-radio">
+                        <input
+                          type="radio"
+                          class="custom-control-input"
+                          id="ccavenue-radio"
+                          name="payment_type_option"
+                          value="gAAAAABlInUjd55WA7wE2baULD8KR8GThd3Ob-Wpzt5_6ftjgWzs6as15ktoL08PDNvfHiPKVYM-Sf26rRWGb3i-5JsaI0dnww=="
+                        />
+                        <label
+                          class="custom-control-label form-label font-size-16"
+                          for="ccavenue-radio"
+                        >
+                          COD (Cash on delivery )
+                        </label>
+                      </div>
+                    </li>
+                    <li
+                      (click)="payonline()"
+                      class="list-group-item d-flex justify-content-between align-items-center py-3"
+                    >
+                      <div class="custom-control custom-radio">
+                        <input
+                          type="radio"
+                          class="custom-control-input"
+                          id="paypal-radio"
+                          name="payment_type_option"
+                          value="gAAAAABlInUjd55WA7wE2baULD8KR8GThd3Ob-Wpzt5_6ftjgWzs6as15ktoL08PDNvfHiPKVYM-Sf26rRWGb3i-5JsaI0dnww=="
+                        />
+                        <label
+                          class="custom-control-label form-label font-size-16"
+                          for="paypal-radio"
+                        >
+                          Online
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- payment order summary -->
+    <!-- not appplyed coupon -->
+    <div class="col-lg-3" *ngIf="!couponCodeApplyed">
+      <form method="post" id="checkout-form">
+        <div id="order-summary">
+          <div class="mb-3">
+            <div class="border-bottom border-color-1 mb-3">
+              <h3
+                class="section-title section-title__sm mb-0 pb-2 font-size-18 font-weight-bold"
+              >
+                Order Summary
+              </h3>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p *ngIf="isbuynow" class="mb-2">Sub Total (1 Item)</p>
+                <p *ngIf="iscart" class="mb-2">
+                  Sub Total ({{ cartDetail.cart_list.length }} Item)
+                </p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p *ngIf="iscart" class="font-weight-bold mb-2 text-right">
+                  {{ cartDetail.item_total }}
+                </p>
+                <p
+                  *ngIf="isbuynow && hasAttribute(buynow, 'id')"
+                  class="font-weight-bold mb-2 text-right"
+                >
+                  {{ buynow.offer_price }}
+                </p>
+                <p
+                  *ngIf="isbuynow && !hasAttribute(buynow, 'id')"
+                  class="font-weight-bold mb-2 text-right"
+                >
+                  {{ buynow.product.offer_price }}
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2">Delivery Charge</p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right">Free</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2 gifting_card">Gift Card</p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p
+                  class="font-weight-bold mb-2 text-right gifting_card_charges"
+                >
+                  ₹0
+                </p>
+              </div>
+            </div>
+            <div class="row" id="coupon_code_discount">
+              <div class="col-8 col-md-8">
+                <p class="mb-2 gifting">Coupon discount</p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p
+                  class="font-weight-bold mb-2 text-right"
+                  id="coupon_discount"
+                >
+                  ₹0
+                </p>
+              </div>
+            </div>
+            <input type="hidden" name="enc" id="enc" value="" />
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2"></p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2 gifting"></p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right gifting_charges"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 col-md-4">
+                <p class="mb-2 font-weight-bold">TOTAL:</p>
+              </div>
+              <div class="col-8 col-md-8 text-right">
+                <div class="prodcut-price text-right">
+                  <div
+                    *ngIf="iscart"
+                    class="text-dark font-weight-bold"
+                    id="totalAmount"
+                  >
+                    {{ cartDetail.item_total }}
+                  </div>
+                  <div
+                    *ngIf="isbuynow && hasAttribute(buynow, 'id')"
+                    class="text-dark font-weight-bold"
+                    id="totalAmount"
+                  >
+                    {{ buynow.offer_price }}
+                  </div>
+                  <div
+                    *ngIf="isbuynow && !hasAttribute(buynow, 'id')"
+                    class="text-dark font-weight-bold"
+                    id="totalAmount"
+                  >
+                    {{ buynow.product.offer_price }}
+                  </div>
+                </div>
+                <!-- <small class="text-gray-5">Price Are Inclusive of Taxes</small> -->
+              </div>
+            </div>
+            <div class="mt-3 mb-3">
+              <input
+                type="button"
+                class="form-control mb-3"
+                maxlength="10"
+                minlength="10"
+                name="pancard_number"
+                id="panNumber"
+                placeholder="Enter PAN No"
+                aria-label="GST No"
+                aria-describedby="panNumber"
+                required=""
+                value="Confirm Order"
+                style="background-color: #c9d1ff; color: black"
+                (click)="confirmorder()"
+              />
+
+              <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="JRGfEbrTYpo8kIV0pW3tQfjsAuMM8jCKJ8RiF9HJIBrjJPOtKxooImQHkFjXkT8c"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- appplyed coupon -->
+    <div class="col-lg-3" *ngIf="couponCodeApplyed">
+      <form method="post" id="checkout-form">
+        <div id="order-summary">
+          <div class="mb-3">
+            <div class="border-bottom border-color-1 mb-3">
+              <h3
+                class="section-title section-title__sm mb-0 pb-2 font-size-18 font-weight-bold"
+              >
+                Order Summary
+              </h3>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p *ngIf="isbuynow" class="mb-2">Sub Total (1 Item)</p>
+                <p *ngIf="iscart" class="mb-2">
+                  Sub Total ({{ cartDetail.cart_list.length }} Item)
+                </p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right">
+                  {{ couponDetails.total_amount }}
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2">Delivery Charge</p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right">Free</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2 gifting_card">Gift Card</p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p
+                  class="font-weight-bold mb-2 text-right gifting_card_charges"
+                >
+                  ₹0
+                </p>
+              </div>
+            </div>
+            <div class="row" id="coupon_code_discount">
+              <div class="col-8 col-md-8">
+                <p class="mb-2 gifting">Coupon discount</p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p
+                  class="font-weight-bold mb-2 text-right"
+                  id="coupon_discount"
+                >
+                  {{ couponDetails.discount_amount }}
+                </p>
+              </div>
+            </div>
+            <input type="hidden" name="enc" id="enc" value="" />
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2"></p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2 gifting"></p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right gifting_charges"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 col-md-4">
+                <p class="mb-2 font-weight-bold">TOTAL:</p>
+              </div>
+              <div class="col-8 col-md-8 text-right">
+                <div class="prodcut-price text-right">
+                  <div class="text-dark font-weight-bold" id="totalAmount">
+                    {{ couponDetails.payable_amount }}
+                  </div>
+                </div>
+                <!-- <small class="text-gray-5">Price Are Inclusive of Taxes</small> -->
+              </div>
+            </div>
+            <div class="mt-3 mb-3">
+              <input
+                type="button"
+                class="form-control mb-3"
+                maxlength="10"
+                minlength="10"
+                name="pancard_number"
+                id="panNumber"
+                placeholder="Enter PAN No"
+                aria-label="GST No"
+                aria-describedby="panNumber"
+                required=""
+                value="Confirm Order"
+                style="background-color: rgb(35, 183, 241); color: white"
+                (click)="confirmorder()"
+              />
+
+              <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="JRGfEbrTYpo8kIV0pW3tQfjsAuMM8jCKJ8RiF9HJIBrjJPOtKxooImQHkFjXkT8c"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- payment order summary end-->
+  </div>
+</div>

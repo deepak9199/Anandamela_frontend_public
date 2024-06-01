@@ -1,0 +1,716 @@
+<!-- scrolle main -->
+<div
+  class="search-results"
+  infiniteScroll
+  (scrolled)="scrolleddown()"
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  [scrollWindow]="true"
+>
+  <!-- main -->
+  <main id="content" role="main" style="margin-top: 0px">
+    <div class="container">
+      <!-- back button home -->
+      <div
+        class="my-md-2"
+        style="display: flex; justify-content: space-between"
+      >
+        <nav aria-label="breadcrumb" style="width: 100%">
+          <ol
+            class="breadcrumb mb-0 mb-lg-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+            style="display: flex; justify-content: space-between; width: 100%"
+          >
+            <li class="breadcrumb-item">
+              <a [routerLink]="['/']">
+                <i class="fa fa-home" style="margin-right: 5px"></i>Home</a
+              >
+            </li>
+            <li class="breadcrumb-item">
+              <a onclick="window.history.back()"
+                ><i class="fa fa-arrow-left" style="margin-right: 5px"></i
+                >Back</a
+              >
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <!-- loading -->
+      <div
+        style="
+          height: 700px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+        *ngIf="loading"
+      >
+        <app-loading></app-loading>
+      </div>
+      <!-- after -->
+      <div *ngIf="!loading">
+        <div class="my-md-2">
+          <nav aria-label="breadcrumb">
+            <ol
+              class="breadcrumb mb-0 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+            ></ol>
+          </nav>
+        </div>
+        <!-- form -->
+        <form>
+          <div class="row mb-4 mb-lg-8">
+            <!-- filter -->
+            <div class="d-none d-xl-block col-xl-3 col-wd-2gdot5">
+              <div
+                class="mb-6 border border-width-2 border-color-3 borders-radius-6"
+              >
+                <!-- List -->
+                <ul
+                  id="sidebarNav"
+                  class="list-unstyled mb-0 sidebar-navbar view-all"
+                >
+                  <li>
+                    <div class="dropdown-title">Browse Categories</div>
+                  </li>
+
+                  <li *ngFor="let obj of ProductFilterData.filter_category">
+                    <a
+                      (click)="getfilterfunction(obj.id)"
+                      class="dropdown-toggle dropdown-toggle-collapse"
+                      role="button"
+                      data-toggle="collapse"
+                      aria-expanded="false"
+                      aria-controls="sidebarNav1Collapse-1"
+                      data-target="#sidebarNav1Collapse-1"
+                    >
+                      {{ obj.category_name }}
+                      <span
+                        class="text-gray-25 font-size-12 font-weight-normal"
+                      >
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                <!-- End List -->
+              </div>
+              <div class="sticky-top mb-6">
+                <div class="border-bottom border-color-1 mb-5">
+                  <h3
+                    class="section-title section-title__sm mb-0 pb-2 font-size-18"
+                  >
+                    Filters
+                  </h3>
+                </div>
+                <div class="border-bottom pb-4 mb-4">
+                  <h4 class="font-size-14 mb-3 font-weight-bold">Brands</h4>
+                  <!-- Checkboxes -->
+
+                  <div
+                    *ngFor="let obj of ProductFilterData.filter_brand"
+                    class="form-group d-flex align-items-center justify-content-between mb-2 pb-1"
+                  >
+                    <a (click)="getfilterbybrand(obj.id)" role="button">
+                      {{ obj.brand_name }}
+                    </a>
+                    <!-- <div class="custom-control">
+              <label class="custom-control-label" for="brand-BAJAJ">
+                {{ obj.brand_name }}
+              </label>
+            </div> -->
+                  </div>
+                  <!-- End Link -->
+                </div>
+              </div>
+            </div>
+            <!-- items -->
+            <div class="col-xl-9 col-wd-9gdot5">
+              <div class="mb-3 mb-lg-6">
+                <!-- banner -->
+                <a href="#" class="row align-items-center">
+                  <div class="col-md-12 mb-4 mb-md-0">
+                    <owl-carousel-o [options]="banner" #owlCar>
+                      <ng-template
+                        *ngFor="let image of ProductFilterData.filter_category"
+                        carouselSlide
+                      >
+                        <img
+                          (click)="routhpathproductwisepagebanner(image)"
+                          class="img-fluid lazy mx-auto d-block"
+                          [src]="image.full_category_banner"
+                          alt="Image Description"
+                          style=""
+                        />
+                      </ng-template>
+                    </owl-carousel-o>
+                    <!-- <img
+                class="img-fluid lazy mx-auto d-block"
+                src="https://d1kivxjtmxnd4.cloudfront.net/filters:format(webp)/images/category_page_home_appliances_s9N5ud3.png"
+                alt="Image Description"
+                style=""
+              /> -->
+                  </div>
+                </a>
+              </div>
+              <!-- filter menu -->
+              <div
+                *ngIf="mobile"
+                class="flex-center-between borders-radius-9 py-2 horizontal-filter"
+              >
+                <div class="d-xl-none">
+                  <!-- Account Sidebar Toggle Button -->
+                  <a
+                    (click)="openNav()"
+                    id="sidebarNavToggler1"
+                    class="btn btn-sm py-1 font-weight-normal target-of-invoker-has-unfolds"
+                    href="javascript:;"
+                    role="button"
+                    aria-controls="sidebarContent1"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-unfold-event="click"
+                    data-unfold-hide-on-scroll="false"
+                    data-unfold-target="#sidebarContent1"
+                    data-unfold-type="css-animation"
+                    data-unfold-animation-in="fadeInLeft"
+                    data-unfold-animation-out="fadeOutLeft"
+                    data-unfold-duration="500"
+                  >
+                    <i class="fas fa-sliders-h"></i>
+                    <span class="ml-1">Filters</span>
+                  </a>
+                  <!-- End Account Sidebar Toggle Button -->
+                </div>
+                <div class="px-3 d-none d-xl-block">
+                  <ul class="nav nav-tab-shop" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                      <a
+                        class="nav-link active"
+                        id="pills-one-example1-tab"
+                        data-toggle="pill"
+                        href="#pills-one-example1"
+                        role="tab"
+                        aria-controls="pills-one-example1"
+                        aria-selected="false"
+                      >
+                        <div
+                          class="d-md-flex justify-content-md-center align-items-md-center"
+                        >
+                          <i class="fa fa-th"></i>
+                        </div>
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a
+                        class="nav-link"
+                        id="pills-three-example1-tab"
+                        data-toggle="pill"
+                        href="#pills-three-example1"
+                        role="tab"
+                        aria-controls="pills-three-example1"
+                        aria-selected="true"
+                      >
+                        <div
+                          class="d-md-flex justify-content-md-center align-items-md-center"
+                        >
+                          <i class="fa fa-list"></i>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="d-flex filter-dropdown">
+                  <!-- Select -->
+                  <div
+                    (click)="pricelowhighfilteroptionshow()"
+                    class="dropdown bootstrap-select js-select dropdown-select max-width-200 max-width-160-sm right-dropdown-0 px-2 px-xl-0"
+                  >
+                    <select
+                      name="sort_option"
+                      id="sort_options_id"
+                      onchange="this.form.submit()"
+                      class="js-select selectpicker dropdown-select max-width-200 max-width-160-sm right-dropdown-0 px-2 px-xl-0"
+                      data-style="btn-sm bg-white font-weight-normal py-2 border text-gray-20 bg-lg-down-transparent border-lg-down-0"
+                      tabindex="-98"
+                    >
+                      <option style="display: none" id="default" value="one">
+                        Popularity
+                      </option>
+                      <option id="az" name="az" value="two">Sort by A-Z</option>
+                      <option id="za" value="three">Sort by Z-A</option>
+                      <option id="pricelh" value="four" selected="">
+                        Price: low to high
+                      </option>
+                      <option id="pricehl" value="five">
+                        Price: high to low
+                      </option>
+                      <option id="dicountl" value="six">
+                        Discount: high to low
+                      </option>
+                    </select>
+                    <button
+                      type="button"
+                      class="btn dropdown-toggle btn-sm bg-white font-weight-normal py-2 border text-gray-20 bg-lg-down-transparent border-lg-down-0"
+                      data-toggle="dropdown"
+                      role="button"
+                      data-id="sort_options_id"
+                      title="Price: low to high"
+                      aria-expanded="false"
+                    >
+                      <div class="filter-option">
+                        <div class="filter-option-inner">
+                          <div class="filter-option-inner-inner">
+                            Price: Popularity
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+                    <div
+                      *ngIf="pricelowhighfilteroption"
+                      class="dropdown-menu show"
+                      role="combobox"
+                      x-placement="bottom-start"
+                      style="
+                        max-height: 534.406px;
+                        overflow: hidden;
+                        min-height: 139px;
+                        position: absolute;
+                        will-change: transform;
+                        top: 0px;
+                        left: 0px;
+                        transform: translate3d(8px, 34px, 0px);
+                      "
+                    >
+                      <div
+                        class="inner show"
+                        role="listbox"
+                        aria-expanded="true"
+                        tabindex="-1"
+                        style="
+                          max-height: 502.406px;
+                          overflow-y: auto;
+                          min-height: 107px;
+                        "
+                      >
+                        <ul class="dropdown-menu inner show">
+                          <li>
+                            <a
+                              role="option"
+                              class="dropdown-item"
+                              style="display: none"
+                              aria-disabled="false"
+                              tabindex="0"
+                              aria-selected="false"
+                              ><span class="bs-ok-default check-mark"></span
+                              ><span class="text"> Popularity </span></a
+                            >
+                          </li>
+                          <li>
+                            <a
+                              (click)="shortAZ()"
+                              role="option"
+                              class="dropdown-item"
+                              aria-disabled="false"
+                              tabindex="0"
+                              aria-selected="false"
+                              ><span class="bs-ok-default check-mark"></span
+                              ><span class="text">Sort by A-Z </span></a
+                            >
+                          </li>
+                          <li>
+                            <a
+                              (click)="shortZA()"
+                              role="option"
+                              class="dropdown-item"
+                              aria-disabled="false"
+                              tabindex="0"
+                              aria-selected="false"
+                              ><span class="bs-ok-default check-mark"></span
+                              ><span class="text"> Sort by Z-A </span></a
+                            >
+                          </li>
+                          <li class="selected active">
+                            <a
+                              (click)="shortlowtohigh()"
+                              role="option"
+                              class="dropdown-item selected active"
+                              aria-disabled="false"
+                              tabindex="0"
+                              aria-selected="true"
+                              ><span class="bs-ok-default check-mark"></span
+                              ><span class="text">Price: low to high </span></a
+                            >
+                          </li>
+                          <li>
+                            <a
+                              (click)="shorthightolow()"
+                              role="option"
+                              class="dropdown-item"
+                              aria-disabled="false"
+                              tabindex="0"
+                              aria-selected="false"
+                              ><span class="bs-ok-default check-mark"></span
+                              ><span class="text">Price: high to low </span></a
+                            >
+                          </li>
+                          <li>
+                            <a
+                              (click)="shordisthightolow()"
+                              role="option"
+                              class="dropdown-item"
+                              aria-disabled="false"
+                              tabindex="0"
+                              aria-selected="false"
+                              ><span class="bs-ok-default check-mark"></span
+                              ><span class="text"
+                                >Discount: high to low
+                              </span></a
+                            >
+                          </li>
+                          <li>
+                            <a
+                              (click)="shortdislowtohigh()"
+                              role="option"
+                              class="dropdown-item"
+                              aria-disabled="false"
+                              tabindex="0"
+                              aria-selected="false"
+                              ><span class="bs-ok-default check-mark"></span
+                              ><span class="text"
+                                >Discount: low to high
+                              </span></a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Select -->
+                  <!-- Select -->
+                  <!-- <div
+            class="dropdown bootstrap-select js-select dropdown-select max-width-120"
+          >
+            <select
+              class="js-select selectpicker dropdown-select max-width-120"
+              onchange="this.form.submit()"
+              name="show_count"
+              data-style="btn-sm bg-white font-weight-normal py-2 border text-gray-20 bg-lg-down-transparent border-lg-down-0"
+              tabindex="-98"
+            >
+              <option value="40">Show 40</option>
+              <option value="60">Show 60</option>
+              <option value="100">Show All</option></select
+            ><button
+              type="button"
+              class="btn dropdown-toggle btn-sm bg-white font-weight-normal py-2 border text-gray-20 bg-lg-down-transparent border-lg-down-0"
+              data-toggle="dropdown"
+              role="button"
+              title="Show 40"
+            >
+              <div class="filter-option">
+                <div class="filter-option-inner">
+                  <div class="filter-option-inner-inner">Show 40</div>
+                </div>
+              </div>
+            </button>
+            <div class="dropdown-menu" role="combobox">
+              <div
+                class="inner show"
+                role="listbox"
+                aria-expanded="false"
+                tabindex="-1"
+              >
+                <ul class="dropdown-menu inner show"></ul>
+              </div>
+            </div>
+          </div> -->
+                  <!-- End Select -->
+                </div>
+                <nav
+                  class="px-3 flex-horizontal-center text-gray-20 d-none d-xl-flex"
+                >
+                  <input
+                    size="2"
+                    min="1"
+                    max="1"
+                    step="1"
+                    type="number"
+                    name="page"
+                    id="current_page_id"
+                    onchange="this.form.submit()"
+                    class="form-control text-center px-2 height-35"
+                    value="1"
+                  />
+                  <!--                                of 1-->
+                </nav>
+              </div>
+              <!-- item list -->
+              <div class="tab-content" id="pills-tabContent">
+                <div
+                  class="tab-pane fade pt-2 show active"
+                  id="pills-one-example1"
+                  role="tabpanel"
+                  aria-labelledby="pills-one-example1-tab"
+                  data-target-group="groups"
+                >
+                  <ul
+                    class="row list-unstyled products-group no-gutters products-slider with-margin-less"
+                  >
+                    <li
+                      class="col-6 col-sm-4 col-lg-3"
+                      *ngFor="
+                        let obj of ProductFilterData.products.data;
+                        let i = index
+                      "
+                    >
+                      <div class="product-item">
+                        <div class="product-item__outer h-100">
+                          <div class="product-item__inner position-relative">
+                            <div class="product-item__body">
+                              <div class="mb-2">
+                                <div class="coupon-band font-size-12"></div>
+                              </div>
+                              <button
+                                *ngIf="obj.is_wishlist == '1'"
+                                (click)="addtowishlist(obj.id, i, 'cp')"
+                                class="quick-view optacity-0"
+                                data-id="1028"
+                              >
+                                <i
+                                  style="color: red"
+                                  class="bi bi-heart-fill"
+                                ></i>
+                              </button>
+                              <button
+                                *ngIf="obj.is_wishlist == '0'"
+                                (click)="addtowishlist(obj.id, i, 'cp')"
+                                class="quick-view optacity-0"
+                                data-id="1028"
+                              >
+                                <i class="bi bi-heart"></i>
+                              </button>
+                              <div class="mb-2" (click)="routePathProduct(obj)">
+                                <a class="square-img product-img-mb">
+                                  <img
+                                    class="img-fluid lazy"
+                                    src="{{ obj.full_default_product_image }}"
+                                    alt="Image Description"
+                                    style=""
+                                  />
+                                </a>
+                              </div>
+                              <h5
+                                class="mb-1 product-item__title"
+                                (click)="routePathProduct(obj)"
+                              >
+                                <a class="text-blue font-weight-bold">
+                                  {{ obj.product_name }}
+                                </a>
+                              </h5>
+
+                              <p class="price-label">Our Price</p>
+
+                              <div class="flex-center-between mb-1">
+                                <div
+                                  class="prodcut-price d-flex align-items-center position-relative"
+                                >
+                                  <ins
+                                    class="font-size-20 text-blue-2 text-decoration-none"
+                                  >
+                                    <span class="rupees">₹</span
+                                    >{{ obj.offer_price }}
+                                  </ins>
+
+                                  <div
+                                    class="font-size-12 mb-0 position-absolute bottom--100"
+                                  >
+                                    MRP
+                                    <del>
+                                      <span class="rupees">₹</span>
+                                      {{ obj.mrp_price }}
+                                    </del>
+                                  </div>
+                                  <div class="dis-per-sm ml-2">
+                                    {{
+                                      discountPer(
+                                        obj.mrp_price,
+                                        obj.offer_price
+                                      )
+                                    }}
+                                    % off
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="product-item__footer">
+                              <div
+                                class="border-top pt-2 flex-center-between flex-wrap"
+                              >
+                                <label
+                                  class="product-compare font-size-13"
+                                  for="compare-product-1117"
+                                >
+                                  <input
+                                    type="checkbox"
+                                    value="1117"
+                                    id="compare-product-1117"
+                                    class="compare-product"
+                                  />
+                                  <!-- <span (click)="buynow(obj)">
+                            <i class="ec ec-compare mr-1 font-size-15"></i>
+                            Buy
+                          </span> -->
+                                </label>
+
+                                <a
+                                  (click)="addtocart(obj)"
+                                  data-product="1117"
+                                  data-action="add"
+                                  class="text-gray-6 cart-btn font-size-13 updatecart"
+                                  ><i
+                                    class="ec ec-add-to-cart mr-1 font-size-15"
+                                  ></i>
+                                  Add Cart</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div *ngIf="itemloading" class="centered-container">
+                <!-- <a (click)="previouspage()" class="changebutton previous"
+            >&laquo; Previous</a
+          >
+          <a (click)="nextpage()" class="changebutton next">Next &raquo;</a> -->
+                <app-loading></app-loading>
+              </div>
+            </div>
+          </div>
+        </form>
+        <br /><br />
+        <!-- slider shop by brand -->
+        <div style="margin-top: -30px" _ngcontent-dag-c150="" class="container">
+          <h2 _ngcontent-dag-c150="" class="title">
+            <span _ngcontent-dag-c150="" class="spantitle">Shop By</span> Brands
+          </h2>
+        </div>
+        <div style="margin-top: -30px" _ngcontent-dag-c150="" class="container">
+          <div
+            _ngcontent-dag-c150=""
+            class="banner-container"
+            style="margin-top: 3%"
+          >
+            <owl-carousel-o [options]="customOptions">
+              <ng-template
+                carouselSlide
+                *ngFor="let obj of ProductFilterData.filter_brand"
+                ><img
+                  src="{{ obj.full_brand_image }}"
+                  alt="Image 1"
+                  style="height: 80px; padding: 10px"
+                />
+                <h1 style="text-align: center; font-size: small">
+                  {{ obj.brand_name }}
+                </h1>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<!-- side menu -->
+<div *ngIf="mobile" id="mySidenavcetagory" class="sidenav zeynep opened">
+  <a class="closebtn" (click)="closeNav()">&times;</a>
+  <img height="35" src="assets/nav/images/Group 6.svg" alt="logo" />
+  <ul>
+    <li>
+      <a (click)="onoffFilterBrand()">Filter Brands</a>
+      <ul *ngIf="FilterBrand">
+        <li *ngFor="let obj of ProductFilterData.filter_brand">
+          <a (click)="getfilterbybrand(obj.id)">{{ obj.brand_name }}</a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a (click)="onoffFilterCategory()">Filter Category</a>
+      <ul *ngIf="FilterCategory">
+        <li *ngFor="let obj of ProductFilterData.filter_category">
+          <a (click)="getfilterfunction(obj.id)"> {{ obj.category_name }}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <!-- footer -->
+  <footer>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      viewBox="0 0 300 126.5"
+      style="margin-bottom: -5px; enable-background: new 0 0 300 126.5"
+      xml:space="preserve"
+      class="injected-svg js-svg-injector"
+      data-parent="#SVGwaveWithDots"
+    >
+      <style type="text/css">
+        .wave-bottom-with-dots-0 {
+          fill: #377dff;
+        }
+        .wave-bottom-with-dots-1 {
+          fill: #377dff;
+        }
+        .wave-bottom-with-dots-2 {
+          fill: #de4437;
+        }
+        .wave-bottom-with-dots-3 {
+          fill: #00c9a7;
+        }
+        .wave-bottom-with-dots-4 {
+          fill: #ffc107;
+        }
+      </style>
+      <path
+        class="wave-bottom-with-dots-0 fill-primary"
+        opacity=".6"
+        d="M0,58.9c0-0.9,5.1-2,5.8-2.2c6-0.8,11.8,2.2,17.2,4.6c4.5,2.1,8.6,5.3,13.3,7.1C48.2,73.3,61,73.8,73,69  c43-16.9,40-7.9,84-2.2c44,5.7,83-31.5,143-10.1v69.8H0C0,126.5,0,59,0,58.9z"
+      ></path>
+      <path
+        class="wave-bottom-with-dots-1 fill-primary"
+        d="M300,68.5v58H0v-58c0,0,43-16.7,82,5.6c12.4,7.1,26.5,9.6,40.2,5.9c7.5-2.1,14.5-6.1,20.9-11  c6.2-4.7,12-10.4,18.8-13.8c7.3-3.8,15.6-5.2,23.6-5.2c16.1,0.1,30.7,8.2,45,16.1c13.4,7.4,28.1,12.2,43.3,11.2  C282.5,76.7,292.7,74.4,300,68.5z"
+      ></path>
+      <g>
+        <circle
+          class="wave-bottom-with-dots-2 fill-danger"
+          cx="259.5"
+          cy="17"
+          r="13"
+        ></circle>
+        <circle
+          class="wave-bottom-with-dots-1 fill-primary"
+          cx="290"
+          cy="35.5"
+          r="8.5"
+        ></circle>
+        <circle
+          class="wave-bottom-with-dots-3 fill-success"
+          cx="288"
+          cy="5.5"
+          r="5.5"
+        ></circle>
+        <circle
+          class="wave-bottom-with-dots-4 fill-warning"
+          cx="232.5"
+          cy="34"
+          r="2"
+        ></circle>
+      </g>
+    </svg>
+  </footer>
+</div>

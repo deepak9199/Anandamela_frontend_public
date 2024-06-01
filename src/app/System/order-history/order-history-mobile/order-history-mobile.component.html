@@ -1,0 +1,146 @@
+<!-- loading -->
+<div
+  style="
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+  *ngIf="loading"
+>
+  <app-loading></app-loading>
+</div>
+<!-- main -->
+<main
+  *ngIf="!loading"
+  id="content"
+  role="main"
+  class="cart-page"
+  style="margin-top: 0px"
+>
+  <!-- breadcrumb -->
+  <div class="bg-gray-13 bg-md-transparent">
+    <div class="container">
+      <!-- breadcrumb -->
+      <div class="my-md-3">
+        <nav aria-label="breadcrumb">
+          <ol
+            class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+          >
+            <!-- <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1">
+              <a href="/">Home</a>
+            </li>
+            <li
+              class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active"
+              aria-current="page"
+            >
+              Wishlist
+            </li> -->
+          </ol>
+        </nav>
+      </div>
+      <!-- End breadcrumb -->
+    </div>
+  </div>
+  <!-- End breadcrumb -->
+  <div class="container">
+    <div class="border-bottom border-color-1 mb-5">
+      <h4
+        class="section-title section-title__full d-inline-block mb-0 pb-2 font-size-22"
+      >
+        My Orders
+      </h4>
+    </div>
+    <!-- if order is empty -->
+    <div *ngIf="OrderHistory.order_history.length == 0" class="row">
+      <div class="col-md-12">
+        <div class="card border-0 mb-12">
+          <div class="card-body cart">
+            <div class="col-sm-12 empty-cart-cls text-center">
+              <h3 class="font-weight-bold">Your Order is empty</h3>
+              <div>
+                <img
+                  src="assets/order/images/empty-wishlist.png"
+                  class="img-fluid mb-4"
+                />
+              </div>
+              <a
+                [routerLink]="['/']"
+                class="btn btn-primary"
+                style="color: white"
+                data-abc="true"
+                >Continue shopping</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- data -->
+    <div *ngIf="OrderHistory.order_history.length != 0">
+      <div class="your-orders-mobile-orders-container">
+        <div
+          *ngFor="let obj of OrderDetaildata"
+          class="order-card js-order-card"
+          style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 10px;margin: 5px;"
+        >
+          <!-- csd-sensitive-begin -->
+
+          <div class="a-section a-padding-small js-item">
+            <a class="a-touch-link a-box a-touch-link-noborder">
+              <div class="a-box-inner">
+                <!-- <i class="a-icon a-icon-touch-link"></i> -->
+
+                <span
+                  class="a-declarative"
+                  data-action="set-shipment-info-cookies"
+                  data-set-shipment-info-cookies="{}"
+                >
+                  <div class="a-row a-grid-vertical-align a-grid-center">
+                    <div class="a-column a-span4 a-text-center">
+                      <div class="item-view-left-col-inner">
+                        <img
+                          alt="Mochi Women Black Synthetic Leather Formal/Pump Shoes UK/5 EU/38 (31-254)"
+                          src="{{
+                            obj.product_details.full_default_product_image
+                          }}"
+                          class="yo-critical-feature"
+                          height="80"
+                          width="80"
+                          title="Mochi Women Black Synthetic Leather Formal/Pump Shoes UK/5 EU/38 (31-254)"
+                          data-already-flushed-csm="true"
+                        />
+                      </div>
+                    </div>
+                    <div class="a-column a-span8 a-span-last">
+                      <div class="a-row">
+                        <span class="a-text-bold">{{
+                          obj.product_details.class_name
+                        }}</span>
+                      </div>
+                      <div class="a-row">
+                        <span
+                          style="font-size: small"
+                          class="a-color-secondary"
+                        >
+                          Status : {{ obj.status }}
+                        </span>
+                      </div>
+
+                      <span
+                        data-cookiepayload='{"primaryStatus":"Delivered 10-Nov-2023","shortStatus":"DELIVERED"}'
+                        class="js-shipment-info aok-hidden"
+                      ></span>
+                    </div>
+                  </div>
+                </span>
+              </div>
+            </a>
+          </div>
+
+          <!-- csd-sensitive-end -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

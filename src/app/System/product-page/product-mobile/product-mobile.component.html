@@ -1,0 +1,856 @@
+<!-- main -->
+<div _ngcontent-jar-c145="" class="container">
+  <div class="my-md-2" style="display: flex; justify-content: space-between">
+    <nav aria-label="breadcrumb" style="width: 100%">
+      <ol
+        class="breadcrumb mb-0 mb-lg-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+        style="display: flex; justify-content: space-between; width: 100%"
+      >
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/']">
+            <i class="fa fa-home" style="margin-right: 5px"></i>Home</a
+          >
+        </li>
+        <li class="breadcrumb-item">
+          <a onclick="window.history.back()"
+            ><i class="fa fa-arrow-left" style="margin-right: 5px"></i>Back</a
+          >
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <!-- loading -->
+  <div
+    style="
+      height: 700px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+    *ngIf="loading"
+  >
+    <app-loading></app-loading>
+  </div>
+  <!-- after loading -->
+  <div *ngIf="!loading">
+    <!-- product deatils -->
+    <div _ngcontent-jar-c145="" class="content-padding">
+      <div _ngcontent-jar-c145="" class="wrapper row">
+        <div
+          _ngcontent-jar-c145=""
+          class="preview col-md-6"
+          style="width: 100%"
+        >
+          <div _ngcontent-jar-c145="" class="preview-pic tab-content"></div>
+          <owl-carousel-o [options]="product" #owlCar>
+            <ng-template
+              *ngFor="let image of productImages; let i = index"
+              carouselSlide
+              [id]="image.url"
+            >
+              <!-- <lib-ngx-image-zoom
+            style="width: 100%;"
+            [thumbImage]="image.url"
+            [fullImage]="image.url"
+            [magnification]="2"
+            [enableScrollZoom]="true"
+            [enableLens]="true"
+            [lensWidth]="500"
+            [lensHeight]="500"
+            [circularLens]="false"
+          ></lib-ngx-image-zoom> -->
+              <img [src]="image.url" style="width: 100%; height: 500px" />
+            </ng-template>
+          </owl-carousel-o>
+          <!-- <br />
+      <div>
+        <owl-carousel-o [options]="productnav">
+          <ng-template
+            *ngFor="let image of productImages; let i = index"
+            carouselSlide
+            [id]="image.url + i"
+            [width]="80"
+          >
+            <a (click)="owlCar.to(image.url); changeimage(image.url + i)">
+              <img
+                [src]="image.url"
+                [ngClass]="{
+                  'product-gallery__carousel-item--active':
+                    selectedImage === image.url + i ||
+                    (i == 0 && !selectedImage)
+                }"
+              />
+            </a>
+          </ng-template>
+        </owl-carousel-o>
+      </div> -->
+        </div>
+        <div _ngcontent-jar-c145="" class="details col-md-6">
+          <div
+            _ngcontent-jar-c145=""
+            class="top-share"
+            style="margin-top: 15px"
+          >
+            <ul _ngcontent-jar-c145="" class="tags">
+              <li _ngcontent-jar-c145="">
+                <a _ngcontent-jar-c145="" href="">
+                  {{ productDetils.product.menu_type_name }}
+                </a>
+              </li>
+              <li _ngcontent-jar-c145="">
+                <a _ngcontent-jar-c145="" href="">{{
+                  productDetils.product.group_name
+                }}</a>
+              </li>
+              <li _ngcontent-jar-c145="">
+                <a _ngcontent-jar-c145="" href="">{{
+                  productDetils.product.brand_name
+                }}</a>
+              </li>
+            </ul>
+            <button
+              *ngIf="productDetils.product.is_wishlist == '1'"
+              [style]="{ color: 'red' }"
+              (click)="addtowishlistForProduct(productDetils.product.id)"
+              type="button"
+              value="1905"
+              class="add-wishlist wishlist-btn"
+              tabindex="0"
+            >
+              <i class="font-size-14 text-gray-5 fas fa-heart"></i>
+            </button>
+            <button
+              *ngIf="productDetils.product.is_wishlist == '0'"
+              (click)="addtowishlistForProduct(productDetils.product.id)"
+              type="button"
+              value="1905"
+              class="add-wishlist wishlist-btn"
+              tabindex="0"
+            >
+              <i class="font-size-14 text-gray-5 fas fa-heart"></i>
+            </button>
+            <ion-icon
+              style="margin-right: -30px"
+              _ngcontent-jar-c145=""
+              name="share-social-outline"
+              class="share md hydrated"
+              ng-reflect-name="share-social-outline"
+              aria-label="share social outline"
+              role="img"
+            ></ion-icon>
+          </div>
+          <h3 _ngcontent-jar-c145="" class="product-title">
+            {{ productDetils.product.product_name }}
+          </h3>
+          <h4 _ngcontent-jar-c145="" class="productId">
+            {{ productDetils.product.product_slug_url }}
+            <span _ngcontent-jar-c145="">In-Stock</span>
+          </h4>
+          <div _ngcontent-jar-c145="" class="rating">
+            <div _ngcontent-jar-c145="" class="stars">
+              <ion-icon
+                _ngcontent-jar-c145=""
+                name="star"
+                class="ratingstar checked"
+                ng-reflect-name="share-social-outline"
+                aria-label="share social outline"
+                role="img"
+              ></ion-icon>
+              <ion-icon
+                _ngcontent-jar-c145=""
+                name="star"
+                class="ratingstar checked"
+                ng-reflect-name="share-social-outline"
+                aria-label="share social outline"
+                role="img"
+              ></ion-icon>
+              <ion-icon
+                _ngcontent-jar-c145=""
+                name="star"
+                class="ratingstar checked"
+                ng-reflect-name="share-social-outline"
+                aria-label="share social outline"
+                role="img"
+              ></ion-icon>
+              <ion-icon
+                _ngcontent-jar-c145=""
+                name="star"
+                class="ratingstar"
+                ng-reflect-name="share-social-outline"
+                aria-label="share social outline"
+                role="img"
+              ></ion-icon>
+              <ion-icon
+                _ngcontent-jar-c145=""
+                name="star"
+                class="ratingstar"
+                ng-reflect-name="share-social-outline"
+                aria-label="share social outline"
+                role="img"
+              ></ion-icon>
+              <a _ngcontent-jar-c145="" href="">(41 reviews)</a>
+            </div>
+          </div>
+          <h6 _ngcontent-jar-c145="" class="sub-title">Current Price</h6>
+          <h4 _ngcontent-jar-c145="" class="priceOne">
+            ₹ {{ productDetils.product.offer_price }}
+            <span _ngcontent-jar-c145=""
+              >₹ {{ productDetils.product.mrp_price }}</span
+            >
+          </h4>
+          <h6 _ngcontent-jar-c145="" class="sub-title">
+            Description : {{ productDetils.product.product_description }}
+          </h6>
+
+          <div>
+            <h6 _ngcontent-jar-c145="" class="sub-title">Available offers</h6>
+            <div
+              *ngFor="let obj of productDetils.offers"
+              class="offersavilable"
+            >
+              <img
+                src="https://rukminim1.flixcart.com/www/36/36/promos/06/09/2016/c22c9fc4-0555-4460-8401-bf5c28d7ba29.png?q=90"
+                width="18"
+                height="18"
+                class="_3HLfAg"
+              />
+              <h6
+                _ngcontent-jar-c145=""
+                class="sub-title"
+                style="margin-top: 2px"
+              >
+                {{ obj.offer_name }}
+              </h6>
+            </div>
+          </div>
+
+          <h4 _ngcontent-jar-c145="" class="feature"></h4>
+          <div _ngcontent-jar-c145="" class="exchange">
+            <div _ngcontent-jar-c145="" class="exchange-head">
+              <div _ngcontent-jar-c145="" class="exc-icon">
+                <ion-icon
+                  _ngcontent-jar-c145=""
+                  name="cube-outline"
+                  ng-reflect-name="cube-outline"
+                  aria-label="cube outline"
+                  role="img"
+                  class="md hydrated"
+                ></ion-icon>
+              </div>
+              <div _ngcontent-jar-c145="">
+                <h3 _ngcontent-jar-c145="">With Exchange</h3>
+                <h4 _ngcontent-jar-c145="">Up to ₹ 800.00 off</h4>
+              </div>
+            </div>
+            <button
+              _ngcontent-jar-c145=""
+              type="button"
+              class="add-to-cart btn btn-secondary w-100"
+            >
+              EXCHANGE OFFERS
+            </button>
+          </div>
+          <div style="display: flex" _ngcontent-jar-c145="" class="action">
+            <button
+              (click)="addtocart(productDetils)"
+              _ngcontent-jar-c145=""
+              type="button"
+              class="add-to-cart btn btn-secondary"
+            >
+              ADD TO CART</button
+            ><button
+              (click)="buynow(productDetils)"
+              _ngcontent-jar-c145=""
+              type="button"
+              class="add-to-cart btn btn-secondary"
+              style="margin-left: 10px"
+            >
+              BUY NOW
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- check pincode -->
+    <div class="mb-2">
+      <div class="d-flex">
+        <h6 class="font-size-14 font-weight-bold mt-1">Delivery</h6>
+        <div class="zipcode-search ml-2">
+          <!-- Apply coupon Form -->
+
+          <label class="sr-only" for="delivery_pincode">Enter Pincode</label>
+          <div class="input-group">
+            <input
+              #pincode
+              type="number"
+              class="form-control border-light-1 border-right-0"
+              name="delivery_pincode"
+              id="delivery_pincode"
+              placeholder="Enter Pincode"
+              aria-label="Enter Pincode"
+              aria-describedby="subscribeButtonExample2"
+              maxlength="6"
+              required=""
+            />
+            <div class="input-group-append border-left-0">
+              <button
+                type="button"
+                class="btn btn-block border-light-1 border-left-0 text-blue"
+                id="kohiapp-delivery-check-form"
+                (click)="checkpincode(pincode.value)"
+              >
+                <span class="d-md-inline">Check</span>
+              </button>
+            </div>
+          </div>
+          <!-- <div id="response_msg">
+        <span class="text-red">Enter 6 digit area pincode</span>
+      </div> -->
+          <!-- End Apply coupon Form -->
+        </div>
+      </div>
+    </div>
+    <!-- comapre  spec reiew-->
+    <div _ngcontent-jar-c145="" class="more-info">
+      <!-- heading -->
+      <table _ngcontent-jar-c145="" class="nav" style="display: flex">
+        <tr>
+          <td _ngcontent-jar-c145="" class="nav-item">
+            <h6
+              _ngcontent-jar-c145=""
+              (click)="clickspec()"
+              [ngClass]="{ active: specification }"
+              class="nav-link"
+              ng-reflect-ng-class="[object Object]"
+            >
+              Specifications
+            </h6>
+          </td>
+          <td _ngcontent-jar-c145="" class="nav-item">
+            <h6
+              _ngcontent-jar-c145=""
+              (click)="clickcom()"
+              [ngClass]="{ active: comapre }"
+              class="nav-link"
+              ng-reflect-ng-class="[object Object]"
+            >
+              Compare
+            </h6>
+          </td>
+          <td _ngcontent-jar-c145="" class="nav-item">
+            <h6
+              _ngcontent-jar-c145=""
+              (click)="clickreview()"
+              [ngClass]="{ active: review }"
+              class="nav-link"
+              ng-reflect-ng-class="[object Object]"
+            >
+              Reviews
+            </h6>
+          </td>
+        </tr>
+      </table>
+
+      <!-- specification -->
+      <div
+        *ngIf="specification"
+        class="tab-pane fade active show"
+        id="Jpills-three-example1"
+        role="tabpanel"
+        aria-labelledby="Jpills-three-example1-tab"
+        style="background-color: white !important"
+      >
+        <div class="mx-md-3 pt-1 product-specification-tab">
+          <h3
+            class="font-size-20-lg font-size-20 text-blue-2 font-weight-bolder mb-2 mb-lg-3"
+          >
+            General Features
+          </h3>
+          <div class="row mb-2 mb-lg-3">
+            <div
+              class="col-6 col-md-4"
+              *ngFor="let obj of productDetils.product.product_attributes"
+            >
+              <h4 class="product-attribute-name">{{ obj.attribute_name }}</h4>
+              <p
+                class="text-gray-5 product-specification add-Read-More showlesscontent"
+              >
+                {{ obj.attribute_value }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- rating -->
+      <div
+        *ngIf="review"
+        class="tab-pane fade show d-flex align-items-center justify-content-center"
+        id="Jpills-four-example1"
+        role="tabpanel"
+        aria-labelledby="Jpills-four-example1-tab"
+      >
+        <div class="row mb-0 mb-lg-8">
+          <div class="col-md-6">
+            <!-- Form -->
+            <div class="review-msg"></div>
+            <form
+              class="mt-0 mt-lg-3 d-block"
+              id="user-rating-reviews"
+              novalidate="novalidate"
+            >
+              <input
+                type="hidden"
+                name="csrfmiddlewaretoken"
+                value="t2ajMlDKXybEvXRJoROtANAw4bLn1dzDwwGZqUyzILHzych9g464VYC4GN23B4Ww"
+              />
+              <div class="row align-items-center mb-2 mb-lg-4">
+                <div class="col-md-4 col-lg-3">
+                  <label for="rating" class="form-label mb-0"
+                    >Your Review</label
+                  >
+                </div>
+                <div class="col-md-8 col-lg-9">
+                  <div class="d-block">
+                    <!-- Rating Stars Box -->
+                    <div class="rating-stars text-center">
+                      <ul id="stars">
+                        <li
+                          class="star hover selected"
+                          title="Poor"
+                          data-value="1"
+                        >
+                          <i class="fa fa-star fa-fw"></i>
+                        </li>
+                        <li
+                          class="star hover selected"
+                          title="Fair"
+                          data-value="2"
+                        >
+                          <i class="fa fa-star fa-fw"></i>
+                        </li>
+                        <li
+                          class="star hover selected"
+                          title="Good"
+                          data-value="3"
+                        >
+                          <i class="fa fa-star fa-fw"></i>
+                        </li>
+                        <li class="star" title="Excellent" data-value="4">
+                          <i class="fa fa-star fa-fw"></i>
+                        </li>
+                        <li class="star" title="WOW!!!" data-value="5">
+                          <i class="fa fa-star fa-fw"></i>
+                        </li>
+                        <li class="success-box d-inline-block ml-2">
+                          <span>Good</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="js-form-message">
+                    <input
+                      type="text"
+                      class="position-absolute opacity-0"
+                      name="rating"
+                      data-msg="Please select rating."
+                      required=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="js-form-message form-group mb-3 row">
+                <div class="col-md-4 col-lg-3">
+                  <label for="descriptionTextarea" class="form-label"
+                    >Your Review</label
+                  >
+                </div>
+                <div class="col-md-8 col-lg-9">
+                  <input type="hidden" name="product_id" value="967" />
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    name="review"
+                    id="descriptionTextarea"
+                    data-msg="Please enter your message."
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                    [(ngModel)]="fromreview.review"
+                    required
+                    #review="ngModel"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="js-form-message form-group mb-3 row">
+                <div class="col-md-4 col-lg-3">
+                  <label for="inputName" class="form-label"
+                    >Name <span class="text-danger">*</span></label
+                  >
+                </div>
+                <div class="col-md-8 col-lg-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    id="inputName"
+                    aria-label="Alex Hecker"
+                    required=""
+                    data-msg="Please enter your name."
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                    [(ngModel)]="fromreview.name"
+                    required
+                    #name="ngModel"
+                  />
+                </div>
+              </div>
+              <div class="js-form-message form-group mb-3 row">
+                <div class="col-md-4 col-lg-3">
+                  <label for="emailAddress" class="form-label"
+                    >Email <span class="text-danger">*</span></label
+                  >
+                </div>
+                <div class="col-md-8 col-lg-9">
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    id="emailAddress"
+                    aria-label="alexhecker@pixeel.com"
+                    required=""
+                    data-msg="Please enter a valid email address."
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                    [(ngModel)]="fromreview.email"
+                    required
+                    #email="ngModel"
+                  />
+                </div>
+              </div>
+              <div class="js-form-message form-group mb-3 row">
+                <div class="col-md-4 col-lg-3">
+                  <label for="emailAddress" class="form-label">Mobile</label>
+                </div>
+                <div class="col-md-8 col-lg-9">
+                  <input
+                    type="tel"
+                    minlength="10"
+                    maxlength="10"
+                    class="form-control"
+                    name="mobile"
+                    id="mobile"
+                    aria-label="alexhecker@pixeel.com"
+                    data-msg="Please enter 10 digit mobile number"
+                    data-error-class="u-has-error"
+                    data-success-class="u-has-success"
+                    [(ngModel)]="fromreview.mobile"
+                    required
+                    #mobile="ngModel"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="offset-md-4 offset-lg-3 col-auto">
+                  <button
+                    (click)="Addreview()"
+                    type="submit"
+                    name="submit"
+                    class="btn btn-primary-dark btn-wide transition-3d-hover"
+                  >
+                    Add Review
+                  </button>
+                </div>
+              </div>
+            </form>
+            <!-- End Form -->
+          </div>
+        </div>
+      </div>
+
+      <!-- compare -->
+      <div *ngIf="comapre" style="overflow-x: auto">
+        <table>
+          <tr>
+            <td class="nav-content" colspan="3"></td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="{{
+                  productDetils.similar_products[0].full_default_product_image
+                }}"
+                alt="Product 1"
+                class="product-img default"
+                style="height: 200px"
+              />
+              <h3 style="font-size: 10px">
+                {{ productDetils.similar_products[0].product_name }}
+              </h3>
+              <h4>₹ {{ productDetils.similar_products[0].offer_price }}</h4>
+            </td>
+            <td>
+              <img
+                src="{{
+                  productDetils.similar_products[1].full_default_product_image
+                }}"
+                alt="Product 2"
+                class="product-img default"
+                style="height: 200px"
+              />
+              <h3 style="font-size: 10px">
+                {{ productDetils.similar_products[1].product_name }}
+              </h3>
+              <h4>₹ {{ productDetils.similar_products[1].offer_price }}</h4>
+            </td>
+            <td>
+              <img
+                src="{{
+                  productDetils.similar_products[2].full_default_product_image
+                }}"
+                alt="Product 3"
+                class="product-img default"
+                style="height: 200px"
+              />
+              <h3 style="font-size: 10px">
+                {{ productDetils.similar_products[2].product_name }}
+              </h3>
+              <h4>₹ {{ productDetils.similar_products[2].offer_price }}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class="bold-subhead">Availability</td>
+          </tr>
+          <tr>
+            <td class="border-right padding-left">Stock Available</td>
+            <td class="border-right padding-left">Stock Available</td>
+            <td>Stock Available</td>
+          </tr>
+          <tr>
+            <td colspan="3" class="bold-subhead">
+              {{ productDetils.similar_products[0].brand_name }}
+            </td>
+          </tr>
+          <tr>
+            <td class="border-right padding-left">
+              {{ productDetils.similar_products[1].brand_name }}
+            </td>
+            <td class="border-right padding-left">
+              {{ productDetils.similar_products[2].brand_name }}
+            </td>
+            <td>Samsung</td>
+          </tr>
+          <tr>
+            <td class="border-right padding-left">
+              Fully Automatic Front Load Washing Machines have Great Wash
+              Quality with very less running cost 1200 rpm : Higher the spin
+              speed, lower the drying time 5 Star Rating 6.5 kg 3 Years on
+              Product and 10 Years Warranty on Motor
+            </td>
+            <td class="border-right padding-left">
+              Fully Automatic Front Load Washing Machines have Great Wash
+              Quality with very less running cost 1200 rpm : Higher the spin
+              speed, lower the drying time Number of wash programs - 16 Large
+              LED Display
+            </td>
+            <td>
+              Diamond Drum Digital Inverter Technology 23 years VDE Assurance
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td class="border-right padding-left">
+              <button
+                (click)="Comapreaddtocart(productDetils.similar_products[0])"
+                type="button"
+                class="add-to-cart btn btn-secondary w-100"
+              >
+                ADD CART
+              </button>
+            </td>
+            <td class="border-right padding-left">
+              <button
+                (click)="Comapreaddtocart(productDetils.similar_products[1])"
+                type="button"
+                class="add-to-cart btn btn-secondary w-100"
+              >
+                ADD CART
+              </button>
+            </td>
+            <td style="width: 100px">
+              <button
+                (click)="Comapreaddtocart(productDetils.similar_products[2])"
+                type="button"
+                class="add-to-cart btn btn-secondary w-100"
+              >
+                ADD CART
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td class="border-right padding-left">
+              <button
+                (click)="comparebuynow(productDetils.similar_products[0])"
+                type="button"
+                class="add-to-cart btn btn-secondary w-100"
+              >
+                BUY NOW
+              </button>
+            </td>
+            <td class="border-right padding-left">
+              <button
+                (click)="comparebuynow(productDetils.similar_products[1])"
+                type="button"
+                class="add-to-cart btn btn-secondary w-100"
+              >
+                BUY NOW
+              </button>
+            </td>
+            <td style="width: 130px">
+              <button
+                (click)="comparebuynow(productDetils.similar_products[2])"
+                type="button"
+                class="add-to-cart btn btn-secondary w-100"
+              >
+                BUY NOW
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!-- similer product -->
+    <div style="margin-top: 30px" class="product--heading">
+      <h2 class="category-title">
+        <span _ngcontent-dag-c150=""> Simillar</span> products
+      </h2>
+      <a class="view-btn-rounded">View All</a>
+    </div>
+    <owl-carousel-o [options]="featurediscount">
+      <ng-template
+        carouselSlide
+        *ngFor="let obj of productDetils.similar_products; let i = index"
+      >
+        <div class="product-item" style="margin: 5px">
+          <div class="product-item__outer h-100">
+            <div class="product-item__inner">
+              <div class="product-item__body">
+                <div class="mb-2">
+                  <div class="coupon-band font-size-12"></div>
+                </div>
+                <button
+                  *ngIf="obj.is_wishlist == '1'"
+                  [style]="{ color: 'red' }"
+                  (click)="addtowishlist(obj.id, i, 'sp')"
+                  type="button"
+                  value="1905"
+                  class="add-wishlist wishlist-btn"
+                  tabindex="0"
+                >
+                  <i class="font-size-14 text-gray-5 fas fa-heart"></i>
+                </button>
+                <button
+                  *ngIf="obj.is_wishlist == '0'"
+                  (click)="addtowishlist(obj.id, i, 'sp')"
+                  type="button"
+                  value="1905"
+                  class="add-wishlist wishlist-btn"
+                  tabindex="0"
+                >
+                  <i class="font-size-14 text-gray-5 fas fa-heart"></i>
+                </button>
+                <div
+                  class="mb-2 d-flex justify-content-center align-items-center"
+                >
+                  <a class="d-block text-center image-sec" tabindex="0">
+                    <img
+                      (click)="routePath(obj)"
+                      class="img-fluid owl-lazy"
+                      src="{{ obj.full_default_product_image }}"
+                      data-src="{{ obj.full_default_product_image }}"
+                      alt=""
+                      style="max-width: 100%; max-height: 100%; opacity: 1"
+                    />
+                  </a>
+                </div>
+
+                <h5 class="mb-1 product-item__title">
+                  <a
+                    style="font-size: small"
+                    class="product-title"
+                    (click)="routePath(obj)"
+                  >
+                    <div class="truncate">
+                      {{ obj.product_name }}
+                    </div>
+                  </a>
+                </h5>
+
+                <p class="font-weight-bold text-black mb-0">Our Price</p>
+
+                <div class="flex-center-between mb-1">
+                  <div
+                    class="prodcut-price d-flex align-items-center position-relative"
+                  >
+                    <ins class="font-size-20 text-blue-2 text-decoration-none">
+                      <span class="rupees">₹</span>{{ obj.offer_price }}
+                    </ins>
+
+                    <div
+                      class="font-size-12 mb-0 position-absolute bottom--100"
+                    >
+                      MRP
+                      <del>
+                        <span class="rupees">₹</span>
+                        {{ obj.mrp_price }}
+                      </del>
+                    </div>
+                    <div class="dis-per-sm ml-2">
+                      {{ discountPer(obj.mrp_price, obj.offer_price) }}% off
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="product-item__footer">
+                <div class="border-top pt-2 flex-center-between flex-wrap">
+                  <label class="font-size-13" for="compare-product-1905">
+                  </label>
+                  <a
+                    (click)="addtocart(obj)"
+                    href="javascript:;"
+                    data-product="1905"
+                    data-action="add"
+                    class="text-gray-6 cart-btn font-size-13 updatecart"
+                    tabindex="0"
+                    ><i class="ec ec-add-to-cart mr-1 font-size-15"></i> Add
+                    Cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+    <!-- brands -->
+    <div style="margin-top: 10px" _ngcontent-dag-c150="" class="container">
+      <h2 _ngcontent-dag-c150="" class="title">
+        <span _ngcontent-dag-c150="">Shop By</span> Brands
+      </h2>
+    </div>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide *ngFor="let obj of brandsData"
+        ><img
+          src="{{ obj.full_brand_image }}"
+          alt="Image 1"
+          style="height: 120px; width: 120px; border-radius: 50%"
+        />
+        <h1 style="text-align: center; font-size: small">
+          {{ obj.brand_name }}
+        </h1>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+</div>

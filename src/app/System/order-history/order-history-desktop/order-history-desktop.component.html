@@ -1,0 +1,345 @@
+<!-- loading -->
+<div
+  style="
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+  *ngIf="loading"
+>
+  <app-loading></app-loading>
+</div>
+<!-- main -->
+<main
+  *ngIf="!loading"
+  id="content"
+  role="main"
+  class="cart-page"
+  style="margin-top: 0px"
+>
+  <!-- breadcrumb -->
+  <div class="bg-gray-13 bg-md-transparent">
+    <div class="container">
+      <!-- breadcrumb -->
+      <div class="my-md-3">
+        <nav aria-label="breadcrumb">
+          <ol
+            class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+          >
+            <!-- <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1">
+              <a href="/">Home</a>
+            </li>
+            <li
+              class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active"
+              aria-current="page"
+            >
+              Wishlist
+            </li> -->
+          </ol>
+        </nav>
+      </div>
+      <!-- End breadcrumb -->
+    </div>
+  </div>
+  <!-- End breadcrumb -->
+  <div class="container">
+    <div class="border-bottom border-color-1 mb-5">
+      <h4
+        class="section-title section-title__full d-inline-block mb-0 pb-2 font-size-22"
+      >
+        My Orders
+      </h4>
+    </div>
+    <!-- if order is empty -->
+    <div *ngIf="OrderHistory.order_history.length == 0" class="row">
+      <div class="col-md-12">
+        <div class="card border-0 mb-12">
+          <div class="card-body cart">
+            <div class="col-sm-12 empty-cart-cls text-center">
+              <h3 class="font-weight-bold">Your Order is empty</h3>
+              <div>
+                <img
+                  src="assets/order/images/empty-wishlist.png"
+                  class="img-fluid mb-4"
+                />
+              </div>
+              <a [routerLink]="['/']" class="btn btn-primary" data-abc="true"
+                >Continue shopping</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- data -->
+    <div *ngIf="OrderHistory.order_history.length != 0">
+      <div id="content" class="col-sm-12">
+        <div
+          *ngFor="let obj of OrderDetaildata"
+          class="order-card js-order-card"
+        >
+          <div class="a-box-group a-spacing-base order js-order-card">
+            <!--%args-->
+
+            <div class="a-box a-color-offset-background order-info">
+              <div class="a-box-inner">
+                <div class="a-fixed-right-grid">
+                  <div
+                    class="a-fixed-right-grid-inner"
+                    style="padding-right: 290px"
+                  >
+                    <div
+                      class="a-fixed-right-grid-col a-col-left"
+                      style="padding-right: 0%; float: left"
+                    >
+                      <div class="a-row">
+                        <div class="a-column a-span3">
+                          <div class="a-row a-size-mini">
+                            <span class="a-color-secondary label">
+                              Order placed
+                            </span>
+                          </div>
+                          <div class="a-row a-size-base">
+                            <span class="a-color-secondary value">
+                              {{ obj.product_details.created_at }}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="a-column a-span2 yohtmlc-order-total">
+                          <div class="a-row a-size-mini">
+                            <span class="a-color-secondary label"> Total </span>
+                          </div>
+                          <div class="a-row a-size-base">
+                            <span class="a-color-secondary value">
+                              <span
+                                style="
+                                  text-decoration: inherit;
+                                  white-space: nowrap;
+                                "
+                                ><span class="currencyINR">&nbsp;&nbsp;</span
+                                ><span
+                                  class="currencyINRFallback"
+                                  style="display: none"
+                                  >Rs. </span
+                                >{{ obj.product_details.offer_price }}</span
+                              >
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="a-fixed-right-grid-col actions a-col-right"
+                      style="width: 290px; margin-right: -290px; float: left"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="a-box shipment shipment-is-delivered">
+              <div class="a-box-inner">
+                <div class="a-row shipment-top-row js-shipment-info-container">
+                  <div style="margin-right: 230px; padding-right: 20px">
+                    <div class="a-row"></div>
+                    <div class="a-row">
+                      <span
+                        data-isstatuswithwarning="0"
+                        data-yodeliveryestimate="Delivered 10-Nov-2023"
+                        data-yoshortstatuscode="DELIVERED"
+                        data-yostatusstring=""
+                        class="js-shipment-info aok-hidden"
+                      >
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="a-fixed-right-grid a-spacing-top-medium">
+                  <div
+                    class="a-fixed-right-grid-inner a-grid-vertical-align a-grid-top"
+                  >
+                    <div
+                      class="a-fixed-right-grid-col a-col-left"
+                      style="padding-right: 3.2%; float: left"
+                    >
+                      <div class="a-row">
+                        <div class="a-fixed-left-grid a-spacing-none">
+                          <div
+                            class="a-fixed-left-grid-inner"
+                            style="padding-left: 100px"
+                          >
+                            <div
+                              class="a-text-center a-fixed-left-grid-col a-col-left"
+                              style="
+                                width: 100px;
+                                margin-left: -100px;
+                                float: left;
+                              "
+                            >
+                              <div class="item-view-left-col-inner">
+                                <a class="a-link-normal">
+                                  <img
+                                    alt=""
+                                    src="{{
+                                      obj.product_details
+                                        .full_default_product_image
+                                    }}"
+                                    aria-hidden="true"
+                                    class="yo-critical-feature"
+                                    height="90"
+                                    width="90"
+                                    title="{{ obj.product_details.class_name }}"
+                                    data-already-flushed-csm="true"
+                                  />
+                                </a>
+                              </div>
+                            </div>
+                            <div
+                              class="a-fixed-left-grid-col yohtmlc-item a-col-right"
+                              style="padding-left: 1.5%; float: left"
+                            >
+                              <div class="a-row">
+                                <a
+                                  class="a-link-normal"
+                                  href="/gp/product/B0C7CKM1B8/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;psc=1"
+                                >
+                                  {{ obj.product_details.class_name }} {{obj.product_details.brand_name}} {{obj.product_details.product_name}}
+                                </a>
+                              </div>
+
+                              <div class="a-row">
+                                <span class="a-color-secondary a-text-bold">
+                                </span>
+                                <span class="a-color-secondary"> </span>
+                              </div>
+                              <div class="a-row">
+                                <div class="a-row a-spacing-top-mini">
+                                  <span
+                                    class="a-declarative"
+                                    data-action="bia_button"
+                                    data-bia_button="{}"
+                                  >
+                                    <span
+                                      class="a-button a-spacing-mini a-button-primary yohtmlc-buy-it-again"
+                                      id="a-autoid-3"
+                                      ><span class="a-button-inner"
+                                        ><a
+                                          aria-label="Buy it again"
+                                          class="a-button-text"
+                                          role="button"
+                                          id="a-autoid-3-announce"
+                                        >
+                                          <div
+                                            class="reorder-modal-trigger-text"
+                                          >
+                                            <i
+                                              class="reorder-modal-trigger-icon"
+                                            ></i>
+                                            Buy it again
+                                          </div>
+                                        </a></span
+                                      ></span
+                                    >
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="a-fixed-right-grid-col a-col-right"
+                      style="width: 230px; margin-right: -230px; float: left"
+                    >
+                      <div class="a-row">
+                        <div
+                          class="a-button-stack yohtmlc-shipment-level-connections"
+                        >
+                          <span
+                            class="a-button a-button-normal a-spacing-mini a-button-base"
+                            id="a-autoid-5"
+                            ><span class="a-button-inner"
+                              ><a
+                                id="Leave-seller-feedback_2"
+                                class="a-button-text"
+                                role="button"
+                              >
+                                Track Status : {{ obj.status }}
+                              </a></span
+                            ></span
+                          >
+
+                          <span
+                            class="a-button a-button-normal a-spacing-mini a-button-base"
+                            id="a-autoid-6"
+                            ><span class="a-button-inner"
+                              ><a
+                                id="Leave-delivery-feedback_2"
+                                class="a-button-text"
+                                role="button"
+                              >
+                                Payment Status :
+                                {{ obj.status }}
+                              </a></span
+                            ></span
+                          >
+
+                          <!-- <span
+                            class="a-button a-button-normal a-spacing-mini a-button-base"
+                            id="a-autoid-7"
+                            ><span class="a-button-inner"
+                              ><a
+                                id="Write-a-product-review_2"
+                                class="a-button-text"
+                                role="button"
+                              >
+                                Write a product review
+                              </a></span
+                            ></span
+                          > -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="a-box">
+              <div class="a-box-inner">
+                <span
+                  class="a-declarative"
+                  data-action="a-modal"
+                  data-a-modal='{"width":600,"name":"archive-order-modal","url":"/gp/css/order-history/archive/archiveModal.html?orderId=403-2661544-1349936&amp;shellOrderId=","header":"Archive this order"}'
+                >
+                  <a
+                    class="a-spacing-none a-link-normal yohtmlc-order-level-connections"
+                    href="/gp/css/order-history/archive/ref=ppx_yo_dt_b_archive_order_o00_s00?ie=UTF8&amp;archiveRequest=1&amp;orderIds=403-2661544-1349936&amp;token=259-7887958-5042764"
+                  >
+                    Order ID : {{ obj.product_details.id }}
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card border-0 mb-12">
+            <div class="card-body cart">
+              <div class="col-sm-12 empty-cart-cls text-center">
+                <a [routerLink]="['/']" class="btn btn-primary" data-abc="true"
+                  >Continue shopping</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

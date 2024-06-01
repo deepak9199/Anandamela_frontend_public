@@ -1,0 +1,1044 @@
+<!-- loading -->
+<div
+  style="
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+  *ngIf="loading"
+>
+  <app-loading></app-loading>
+</div>
+<!-- main -->
+<div *ngIf="!loading">
+  <!-- banner -->
+  <div style="width: 100%; margin: 0px auto">
+    <!-- <image-slider [slides]="slides"></image-slider> -->
+    <owl-carousel-o [options]="product" #owlCar>
+      <ng-template
+        *ngFor="let image of furniturehomepagedata.banners"
+        carouselSlide
+      >
+        <img
+          (click)="routhpathproductwisepagebanner(image)"
+          [src]="image.full_banner_image"
+          style="width: 100%; height: 100%"
+        />
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+  <!-- slider -->
+  <div _ngcontent-dag-c150="" class="container">
+    <div _ngcontent-dag-c150="" class="banner-container">
+      <owl-carousel-o [options]="customOptions">
+        <ng-template
+          carouselSlide
+          *ngFor="let obj of furniturehomepagedata.category"
+          ><img
+            (click)="routhpathproductwisepageSlider(obj)"
+            src="{{ obj.full_category_image }}"
+            alt="{{ obj.category_name }}"
+            style="height: 80px; width: 80px; border-radius: 50%"
+          />
+          <h1 style="text-align: center; font-size: small">
+            {{ obj.category_name }}
+          </h1>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+  <!-- product trending_products -->
+  <div style="margin-top: -30px" _ngcontent-dag-c150="" class="container">
+    <h2 _ngcontent-dag-c150="" class="title">
+      <span _ngcontent-dag-c150="">Trending</span> Products
+    </h2>
+  </div>
+  <div style="margin-top: -30px" _ngcontent-dod-c150="">
+    <div _ngcontent-dod-c150="">
+      <div _ngcontent-dod-c150="" class="product-box">
+        <div fxLayout="row wrap">
+          <!-- <div class="child-1" style="height: 350px">
+            <div class="card position-relative">
+              <img
+                src="{{ topOfferImg }}"
+                class="card-img-top"
+                alt="Product Image"
+                style="height: 450px; border-radius: 10px !important"
+              />
+              <div
+                class="card-img-overlay d-flex align-items-end justify-content-start overlay"
+              >
+                <h5 class="card-title text-white text-left">
+                  <span class="text-danger">Top Deals on </span>Electronics
+                  Items Today
+                </h5>
+                <a href="#"><i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div> -->
+          <div class="child-2" style="width: 100%">
+            <owl-carousel-o [options]="featurediscount">
+              <ng-template
+                carouselSlide
+                *ngFor="
+                  let obj of furniturehomepagedata.trending_products;
+                  let i = index
+                "
+              >
+                <div class="item">
+                  <div class="product-card" style="margin: 5px">
+                    <div class="product-item-inner">
+                      <div class="product-item-body">
+                        <div class="product-add-on">
+                          <div class="product-coupon"></div>
+                          <div class="product-addon-btn">
+                            <button class="quick-view optacity-0">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button
+                              *ngIf="obj.is_wishlist == '1'"
+                              [style]="{ color: 'red' }"
+                              (click)="addtowishlist(obj.id, i, 'fp')"
+                              class="wishlist-btn"
+                              data-id="1028"
+                            ></button>
+                            <button
+                              *ngIf="obj.is_wishlist == '0'"
+                              (click)="addtowishlist(obj.id, i, 'fp')"
+                              class="wishlist-btn"
+                              data-id="1028"
+                            ></button>
+                          </div>
+                        </div>
+                        <a
+                          ><div class="product-img">
+                            <img
+                              (click)="routePath(obj)"
+                              class="img-fluid owl-lazy"
+                              src="{{ obj.full_default_product_image }}"
+                              data-src="{{ obj.full_default_product_image }}"
+                              alt=""
+                              style="opacity: 1"
+                            />
+                          </div>
+                        </a>
+                        <a class="product-title" (click)="routePath(obj)">
+                          {{ obj.product_name }}</a
+                        >
+                        <div class="price-label">Our Price</div>
+                        <div class="product-price-box">
+                          <h6 class="product-price">₹ {{ obj.offer_price }}</h6>
+                          <span class="dis-per-sm ml-2">
+                            {{ discountPer(obj.mrp_price, obj.offer_price) }}%
+                            off</span
+                          >
+                          <div class="product-discount">
+                            MRP <del>₹ {{ obj.mrp_price }}</del>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-item-footer">
+                        <div class="d-flex justify-content-between">
+                          <button
+                            class="product-compare add-compare"
+                            data-compare-id="1885"
+                          ></button
+                          ><button
+                            (click)="addtocart(obj)"
+                            class="product-cart-btn add-cart"
+                            data-id="1885"
+                          >
+                            Add Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Featured Discounts On Brands-->
+  <div _ngcontent-dag-c150="" class="container">
+    <h2 _ngcontent-dag-c150="" class="title">
+      <span _ngcontent-dag-c150="">Featured</span> Discounts On Brands
+    </h2>
+  </div>
+  <div style="margin-top: -30px" _ngcontent-dag-c150="" class="container">
+    <div _ngcontent-dag-c150="" class="banner-container">
+      <owl-carousel-o [options]="featurediscountonbrands">
+        <ng-template carouselSlide>
+          <ion-row _ngcontent-dag-c150="" class="md hydrated">
+            <ion-col
+              (click)="routhpathproductwisepage(FeaturedDiscount[0])"
+              _ngcontent-dag-c150=""
+              size="12"
+              size-md="3"
+              ng-reflect-size="12"
+              class="md hydrated"
+              style="
+                flex: 0 0 calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+                width: calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+                max-width: calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+              "
+              ><a _ngcontent-dag-c150="" class="small-banner"
+                ><img
+                  _ngcontent-dag-c150=""
+                  src="{{ FeaturedDiscount[0].full_menu_type_image }}"
+                  alt=""
+                  class="upper"
+                />
+                <div _ngcontent-dag-c150="" class="small-brand">
+                  <img
+                    _ngcontent-dag-c150=""
+                    src="{{ FeaturedDiscount[0].full_sub_menu_type_image }}"
+                  />
+                  <h6 _ngcontent-dag-c150="">
+                    {{ FeaturedDiscount[0].menu_item_title }}"
+                  </h6>
+                </div>
+              </a>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+        <ng-template carouselSlide>
+          <ion-row _ngcontent-dag-c150="" class="md hydrated">
+            <ion-col
+              (click)="routhpathproductwisepage(FeaturedDiscount[1])"
+              _ngcontent-dag-c150=""
+              size="12"
+              size-md="3"
+              ng-reflect-size="12"
+              class="md hydrated"
+              style="
+                flex: 0 0 calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+                width: calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+                max-width: calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+              "
+              ><a _ngcontent-dag-c150="" class="small-banner"
+                ><img
+                  _ngcontent-dag-c150=""
+                  src="{{ FeaturedDiscount[1].full_menu_type_image }}"
+                  alt=""
+                  class="upper"
+                />
+                <div _ngcontent-dag-c150="" class="small-brand">
+                  <img
+                    _ngcontent-dag-c150=""
+                    src="{{ FeaturedDiscount[1].full_sub_menu_type_image }}"
+                  />
+                  <h6 _ngcontent-dag-c150="">
+                    {{ FeaturedDiscount[1].menu_item_title }}"
+                  </h6>
+                </div>
+              </a></ion-col
+            >
+          </ion-row>
+        </ng-template>
+        <ng-template carouselSlide>
+          <ion-row _ngcontent-dag-c150="" class="md hydrated">
+            <ion-col
+              (click)="routhpathproductwisepage(FeaturedDiscount[2])"
+              _ngcontent-dag-c150=""
+              size="12"
+              size-md="3"
+              ng-reflect-size="12"
+              class="md hydrated"
+              style="
+                flex: 0 0 calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+                width: calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+                max-width: calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+              "
+              ><a _ngcontent-dag-c150="" class="small-banner"
+                ><img
+                  _ngcontent-dag-c150=""
+                  src="{{ FeaturedDiscount[2].full_menu_type_image }}"
+                  alt=""
+                  class="upper"
+                />
+                <div _ngcontent-dag-c150="" class="small-brand">
+                  <img
+                    _ngcontent-dag-c150=""
+                    src="{{ FeaturedDiscount[2].full_sub_menu_type_image }}"
+                  />
+                  <h6 _ngcontent-dag-c150="">
+                    {{ FeaturedDiscount[2].menu_item_title }}"
+                  </h6>
+                </div>
+              </a></ion-col
+            >
+          </ion-row>
+        </ng-template>
+        <ng-template carouselSlide>
+          <ion-row _ngcontent-dag-c150="" class="md hydrated">
+            <ion-col
+              (click)="routhpathproductwisepage(FeaturedDiscount[3])"
+              _ngcontent-dag-c150=""
+              size="12"
+              size-md="3"
+              ng-reflect-size="12"
+              class="md hydrated"
+              style="
+                flex: 0 0 calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+                width: calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+                max-width: calc(calc(3 / var(--ion-grid-columns, 12)) * 100%);
+              "
+              ><a _ngcontent-dag-c150="" class="small-banner"
+                ><img
+                  _ngcontent-dag-c150=""
+                  src="{{ FeaturedDiscount[3].full_menu_type_image }}"
+                  alt=""
+                  class="upper"
+                />
+                <div _ngcontent-dag-c150="" class="small-brand">
+                  <img
+                    _ngcontent-dag-c150=""
+                    src="{{ FeaturedDiscount[3].full_sub_menu_type_image }}"
+                  />
+                  <h6 _ngcontent-dag-c150="">
+                    {{ FeaturedDiscount[3].menu_item_title }}"
+                  </h6>
+                </div>
+              </a>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+  <!-- product -->
+  <div
+    *ngFor="let obj of furniturehomepagedata.category_products; let i = index"
+  >
+    <div *ngIf="i == 3">
+      <div *ngIf="obj.products.length != 0" class="product--heading">
+        <h2 class="category-title">
+          <span _ngcontent-dag-c150=""> {{ obj.category_name }}</span>
+        </h2>
+        <a
+          (click)="routhpathproductwisepageSlider(obj)"
+          class="view-btn-rounded"
+          >View All</a
+        >
+      </div>
+      <div *ngIf="obj.products.length != 0" _ngcontent-dod-c150="">
+        <div _ngcontent-dod-c150="">
+          <div _ngcontent-dod-c150="" class="product-box">
+            <div fxLayout="row wrap">
+              <div class="child-2" style="width: 100%">
+                <owl-carousel-o [options]="featurediscount">
+                  <ng-template
+                    carouselSlide
+                    *ngFor="let obj of obj.products; let i = index"
+                  >
+                    <div class="item">
+                      <div class="product-card" style="margin: 5px">
+                        <div class="product-item-inner">
+                          <div class="product-item-body">
+                            <div class="product-add-on">
+                              <div class="product-coupon"></div>
+                              <div class="product-addon-btn">
+                                <button class="quick-view optacity-0">
+                                  <i class="bi bi-eye"></i>
+                                </button>
+                                <button
+                                  *ngIf="obj.is_wishlist == '1'"
+                                  [style]="{ color: 'red' }"
+                                  (click)="addtowishlist(obj.id, i, 'fp')"
+                                  class="wishlist-btn"
+                                  data-id="1028"
+                                ></button>
+                                <button
+                                  *ngIf="obj.is_wishlist == '0'"
+                                  (click)="addtowishlist(obj.id, i, 'fp')"
+                                  class="wishlist-btn"
+                                  data-id="1028"
+                                ></button>
+                              </div>
+                            </div>
+                            <a
+                              ><div class="product-img">
+                                <img
+                                  (click)="routePath(obj)"
+                                  class="img-fluid owl-lazy"
+                                  src="{{ obj.full_default_product_image }}"
+                                  data-src="{{
+                                    obj.full_default_product_image
+                                  }}"
+                                  alt=""
+                                  style="opacity: 1"
+                                />
+                              </div>
+                            </a>
+                            <a class="product-title" (click)="routePath(obj)">
+                              {{ obj.product_name }}</a
+                            >
+                            <div class="price-label">Our Price</div>
+                            <div class="product-price-box">
+                              <h6 class="product-price">
+                                ₹ {{ obj.offer_price }}
+                              </h6>
+                              <span class="dis-per-sm ml-2">
+                                {{
+                                  discountPer(obj.mrp_price, obj.offer_price)
+                                }}% off</span
+                              >
+                              <div class="product-discount">
+                                MRP <del>₹ {{ obj.mrp_price }}</del>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="product-item-footer">
+                            <div class="d-flex justify-content-between">
+                              <button
+                                class="product-compare add-compare"
+                                data-compare-id="1885"
+                              ></button
+                              ><button
+                                (click)="addtocart(obj)"
+                                class="product-cart-btn add-cart"
+                                data-id="1885"
+                              >
+                                Add Cart
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </owl-carousel-o>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- slider shop by brand -->
+  <div style="margin-top: -30px" _ngcontent-dag-c150="" class="container">
+    <h2 _ngcontent-dag-c150="" class="title">
+      <span _ngcontent-dag-c150="">Shop By</span> Brands
+    </h2>
+  </div>
+  <div style="margin-top: -30px" _ngcontent-dag-c150="" class="container">
+    <div _ngcontent-dag-c150="" class="banner-container" style="margin-top: 3%">
+      <owl-carousel-o [options]="customOptions">
+        <ng-template
+          carouselSlide
+          *ngFor="let obj of furniturehomepagedata.brands"
+          ><img
+            src="{{ obj.full_brand_image }}"
+            alt="Image 1"
+            style="height: 120px; width: 120px; border-radius: 50%"
+          />
+          <h1 style="text-align: center; font-size: small">
+            {{ obj.brand_name }}
+          </h1>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+  <!-- fetaure products -->
+  <div style="margin-top: -30px" _ngcontent-dag-c150="" class="container">
+    <h2 _ngcontent-dag-c150="" class="title">
+      <span _ngcontent-dag-c150="">Featured</span> Products
+    </h2>
+  </div>
+  <div style="margin-top: -30px" _ngcontent-dag-c150="" class="container">
+    <div
+      _ngcontent-dag-c150=""
+      class="banner-container border-one large-banner"
+    >
+      <ion-row _ngcontent-dag-c150="" class="md hydrated">
+        <ion-col
+          _ngcontent-dag-c150=""
+          size="4"
+          size-md="4"
+          ng-reflect-size="12"
+          class="md hydrated"
+        >
+          <div _ngcontent-dag-c150="" class="padding">
+            <img
+              (click)="routhpathproductwisepage(FeaturedProducts[3])"
+              _ngcontent-dag-c150=""
+              src="{{ FeaturedProducts[3].full_menu_type_image }}"
+              alt=""
+              style="height: 190px"
+              class="left-3"
+            />
+          </div>
+        </ion-col>
+        <ion-col
+          _ngcontent-dag-c150=""
+          size="8"
+          size-md="8"
+          ng-reflect-size="12"
+          class="md hydrated"
+          style="
+            flex: 0 0 calc(calc(8 / var(--ion-grid-columns, 12)) * 100%);
+            width: calc(calc(8 / var(--ion-grid-columns, 12)) * 100%);
+            max-width: calc(calc(8 / var(--ion-grid-columns, 12)) * 100%);
+          "
+          ><ion-row _ngcontent-dag-c150="" class="md hydrated"
+            ><ion-col
+              _ngcontent-dag-c150=""
+              size="6"
+              size-md="6"
+              ng-reflect-size="12"
+              class="md hydrated"
+              style="
+                flex: 0 0 calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+                width: calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+                max-width: calc(calc(6 / var(--ion-grid-columns, 12)) * 100%);
+              "
+            >
+              <div _ngcontent-dag-c150="" class="padding">
+                <img
+                  (click)="routhpathproductwisepage(FeaturedProducts[1])"
+                  _ngcontent-dag-c150=""
+                  src="{{ FeaturedProducts[1].full_menu_type_image }}"
+                  alt=""
+                  style="height: 100px"
+                  class="right-6"
+                />
+              </div> </ion-col
+            ><ion-col
+              _ngcontent-dag-c150=""
+              size="6"
+              size-md="6"
+              ng-reflect-size="12"
+              class="md hydrated"
+            >
+              <div _ngcontent-dag-c150="" class="padding">
+                <img
+                  (click)="routhpathproductwisepage(FeaturedProducts[2])"
+                  _ngcontent-dag-c150=""
+                  src="{{ FeaturedProducts[2].full_menu_type_image }}"
+                  alt=""
+                  style="height: 100px"
+                  class="right-6"
+                />
+              </div> </ion-col
+          ></ion-row>
+          <div _ngcontent-dag-c150="" class="padding">
+            <img
+              (click)="routhpathproductwisepage(FeaturedProducts[0])"
+              _ngcontent-dag-c150=""
+              src="{{ FeaturedProducts[0].full_menu_type_image }}"
+              alt=""
+              style="height: 85px"
+              class="right-12"
+            />
+          </div> </ion-col
+      ></ion-row>
+    </div>
+  </div>
+  <!-- featured cetagory product -->
+  <div _ngcontent-dod-c150="">
+    <div _ngcontent-dod-c150="">
+      <div _ngcontent-dod-c150="" class="product-box">
+        <div fxLayout="row wrap">
+          <!-- <div class="child-1" style="height: 350px">
+            <div class="card position-relative">
+              <img
+                src="{{ topOfferImg }}"
+                class="card-img-top"
+                alt="Product Image"
+                style="height: 450px; border-radius: 10px !important"
+              />
+              <div
+                class="card-img-overlay d-flex align-items-end justify-content-start overlay"
+              >
+                <h5 class="card-title text-white text-left">
+                  <span class="text-danger">Top Deals on </span>Electronics
+                  Items Today
+                </h5>
+                <a href="#"><i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div> -->
+          <div class="child-2" style="width: 100%">
+            <owl-carousel-o [options]="featurediscount">
+              <ng-template
+                carouselSlide
+                *ngFor="
+                  let obj of furniturehomepagedata.featured_products;
+                  let i = index
+                "
+              >
+                <!-- <div class="owl-item" style="width: 270px">
+                  <div style="background-color: white" class="item">
+                    <div  class="product-card"
+                    style="margin: 5px;">
+                      <div class="product-item-inner" style="height: 450px">
+                        <div class="product-item-body">
+                          <div class="product-add-on">
+                            <div class="product-coupon"></div>
+                            <div class="product-addon-btn">
+                              <button
+                                class="quick-view optacity-0"
+                                data-id="1028"
+                              >
+                                <i class="bi bi-eye"></i>
+                              </button>
+                              <button
+                                *ngIf="obj.is_wishlist == '1'"
+                                [style]="{ color: 'red' }"
+                                (click)="addtowishlist(obj.id, i, 'fp')"
+                                class="wishlist-btn"
+                                data-id="1028"
+                              ></button>
+                              <button
+                                *ngIf="obj.is_wishlist == '0'"
+                                (click)="addtowishlist(obj.id, i, 'fp')"
+                                class="wishlist-btn"
+                                data-id="1028"
+                              ></button>
+                            </div>
+                          </div>
+                          <a
+                            ><div class="product-img">
+                              <img
+                                (click)="routePath(obj)"
+                                src="{{ obj.full_default_product_image }}"
+                                alt=""
+                              />
+                            </div>
+                          </a>
+                          <a (click)="routePath(obj)" class="product-title">
+                            {{ obj.product_name }}
+                          </a>
+                          <div class="product-price-box">
+                            <h6 class="product-price">
+                              ₹ {{ obj.offer_price }}
+                            </h6>
+                            <span class="dis-per-sm ml-2"
+                              >{{
+                                discountPer(obj.mrp_price, obj.offer_price)
+                              }}% off</span
+                            >
+                            <div class="product-discount">
+                              MRP <del>₹ {{ obj.mrp_price }}</del>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="product-item-footer">
+                          <div class="d-flex justify-content-between">
+                            <button class="add-compare"></button
+                            ><button
+                              (click)="addtocart(obj)"
+                              class="product-cart-btn add-cart"
+                              data-id="1028"
+                            >
+                              Add Cart
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="item">
+                  <div class="product-card" style="margin: 5px">
+                    <div class="product-item-inner">
+                      <div class="product-item-body">
+                        <div class="product-add-on">
+                          <div class="product-coupon"></div>
+                          <div class="product-addon-btn">
+                            <button class="quick-view optacity-0">
+                              <i class="bi bi-eye"></i>
+                            </button>
+                            <button
+                              *ngIf="obj.is_wishlist == '1'"
+                              [style]="{ color: 'red' }"
+                              (click)="addtowishlist(obj.id, i, 'fp')"
+                              class="wishlist-btn"
+                              data-id="1028"
+                            ></button>
+                            <button
+                              *ngIf="obj.is_wishlist == '0'"
+                              (click)="addtowishlist(obj.id, i, 'fp')"
+                              class="wishlist-btn"
+                              data-id="1028"
+                            ></button>
+                          </div>
+                        </div>
+                        <a
+                          ><div class="product-img">
+                            <img
+                              (click)="routePath(obj)"
+                              class="img-fluid owl-lazy"
+                              src="{{ obj.full_default_product_image }}"
+                              data-src="{{ obj.full_default_product_image }}"
+                              alt=""
+                              style="opacity: 1"
+                            />
+                          </div>
+                        </a>
+                        <a class="product-title" (click)="routePath(obj)">
+                          {{ obj.product_name }}</a
+                        >
+                        <div class="price-label">Our Price</div>
+                        <div class="product-price-box">
+                          <h6 class="product-price">₹ {{ obj.offer_price }}</h6>
+                          <span class="dis-per-sm ml-2">
+                            {{ discountPer(obj.mrp_price, obj.offer_price) }}%
+                            off</span
+                          >
+                          <div class="product-discount">
+                            MRP <del>₹ {{ obj.mrp_price }}</del>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-item-footer">
+                        <div class="d-flex justify-content-between">
+                          <button
+                            class="product-compare add-compare"
+                            data-compare-id="1885"
+                          ></button
+                          ><button
+                            (click)="addtocart(obj)"
+                            class="product-cart-btn add-cart"
+                            data-id="1885"
+                          >
+                            Add Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </owl-carousel-o>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- audio -->
+  <div _ngcontent-dag-c150="" class="container">
+    <h2 _ngcontent-dag-c150="" class="title">
+      <span _ngcontent-dag-c150="">Deals On</span> Audio
+    </h2>
+  </div>
+  <div style="margin-top: -30px" _ngcontent-dag-c150="" class="banner-demo">
+    <div _ngcontent-dag-c150="" class="container">
+      <div _ngcontent-dag-c150="" class="banner-container">
+        <owl-carousel-o [options]="dealsonaudio">
+          <ng-template carouselSlide>
+            <ion-row _ngcontent-dag-c150="" class="md hydrated">
+              <ion-col
+                _ngcontent-dag-c150=""
+                size="12"
+                size-md="4"
+                ng-reflect-size="12"
+                class="md hydrated"
+                style="
+                  flex: 0 0 calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+                  width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+                  max-width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+                "
+              >
+                <a _ngcontent-dag-c150="" class="small-banner">
+                  <img
+                    (click)="routhpathproductwisepage(DealsOnAudio[0])"
+                    _ngcontent-dag-c150=""
+                    src="{{ DealsOnAudio[0].full_menu_type_image }}"
+                    alt=""
+                    class="upper"
+                  />
+                  <div _ngcontent-dag-c150="" class="small-brand small-brand1">
+                    <h5 _ngcontent-dag-c150="">Offer Valid Till Last Stock</h5>
+                    <h6 _ngcontent-dag-c150="">90% Off on Selected Products</h6>
+                  </div>
+                </a></ion-col
+              >
+            </ion-row>
+          </ng-template>
+          <ng-template carouselSlide>
+            <ion-row _ngcontent-dag-c150="" class="md hydrated">
+              <ion-col
+                _ngcontent-dag-c150=""
+                size="12"
+                size-md="4"
+                ng-reflect-size="12"
+                class="md hydrated"
+                style="
+                  flex: 0 0 calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+                  width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+                  max-width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+                "
+                ><a _ngcontent-dag-c150="" class="small-banner"
+                  ><img
+                    (click)="routhpathproductwisepage(DealsOnAudio[1])"
+                    _ngcontent-dag-c150=""
+                    src="{{ DealsOnAudio[1].full_menu_type_image }}"
+                    alt=""
+                    class="upper"
+                  />
+                  <div _ngcontent-dag-c150="" class="small-brand small-brand1">
+                    <h5 _ngcontent-dag-c150="">Offer Valid Till Last Stock</h5>
+                    <h6 _ngcontent-dag-c150="">90% Off on Selected Products</h6>
+                  </div>
+                </a></ion-col
+              >
+            </ion-row>
+          </ng-template>
+          <ng-template carouselSlide>
+            <ion-row _ngcontent-dag-c150="" class="md hydrated">
+              <ion-col
+                _ngcontent-dag-c150=""
+                size="12"
+                size-md="4"
+                ng-reflect-size="12"
+                class="md hydrated"
+                style="
+                  flex: 0 0 calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+                  width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+                  max-width: calc(calc(4 / var(--ion-grid-columns, 12)) * 100%);
+                "
+                ><a _ngcontent-dag-c150="" class="small-banner"
+                  ><img
+                    (click)="routhpathproductwisepage(DealsOnAudio[2])"
+                    _ngcontent-dag-c150=""
+                    src="{{ DealsOnAudio[2].full_menu_type_image }}"
+                    alt=""
+                    class="upper"
+                  />
+                  <div _ngcontent-dag-c150="" class="small-brand small-brand1">
+                    <h5 _ngcontent-dag-c150="">Offer Valid Till Last Stock</h5>
+                    <h6 _ngcontent-dag-c150="">90% Off on Selected Products</h6>
+                  </div>
+                </a></ion-col
+              >
+            </ion-row>
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+  <!-- product -->
+  <div
+    *ngFor="let obj of furniturehomepagedata.category_products; let i = index"
+  >
+    <div *ngIf="i <= 1">
+      <div *ngIf="obj.products.length != 0" class="product--heading">
+        <h2 class="category-title">
+          <span _ngcontent-dag-c150=""> {{ obj.category_name }}</span>
+        </h2>
+        <a
+          (click)="routhpathproductwisepageSlider(obj)"
+          class="view-btn-rounded"
+          >View All</a
+        >
+      </div>
+      <div *ngIf="obj.products.length != 0" _ngcontent-dod-c150="">
+        <div _ngcontent-dod-c150="">
+          <div _ngcontent-dod-c150="" class="product-box">
+            <div fxLayout="row wrap">
+              <div class="child-2" style="width: 100%">
+                <owl-carousel-o [options]="featurediscount">
+                  <ng-template
+                    carouselSlide
+                    *ngFor="let obj of obj.products; let i = index"
+                  >
+                    <div class="item">
+                      <div class="product-card" style="margin: 5px">
+                        <div class="product-item-inner">
+                          <div class="product-item-body">
+                            <div class="product-add-on">
+                              <div class="product-coupon"></div>
+                              <div class="product-addon-btn">
+                                <button class="quick-view optacity-0">
+                                  <i class="bi bi-eye"></i>
+                                </button>
+                                <button
+                                  *ngIf="obj.is_wishlist == '1'"
+                                  [style]="{ color: 'red' }"
+                                  (click)="addtowishlist(obj.id, i, 'fp')"
+                                  class="wishlist-btn"
+                                  data-id="1028"
+                                ></button>
+                                <button
+                                  *ngIf="obj.is_wishlist == '0'"
+                                  (click)="addtowishlist(obj.id, i, 'fp')"
+                                  class="wishlist-btn"
+                                  data-id="1028"
+                                ></button>
+                              </div>
+                            </div>
+                            <a
+                              ><div class="product-img">
+                                <img
+                                  (click)="routePath(obj)"
+                                  class="img-fluid owl-lazy"
+                                  src="{{ obj.full_default_product_image }}"
+                                  data-src="{{
+                                    obj.full_default_product_image
+                                  }}"
+                                  alt=""
+                                  style="opacity: 1"
+                                />
+                              </div>
+                            </a>
+                            <a class="product-title" (click)="routePath(obj)">
+                              {{ obj.product_name }}</a
+                            >
+                            <div class="price-label">Our Price</div>
+                            <div class="product-price-box">
+                              <h6 class="product-price">
+                                ₹ {{ obj.offer_price }}
+                              </h6>
+                              <span class="dis-per-sm ml-2">
+                                {{
+                                  discountPer(obj.mrp_price, obj.offer_price)
+                                }}% off</span
+                              >
+                              <div class="product-discount">
+                                MRP <del>₹ {{ obj.mrp_price }}</del>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="product-item-footer">
+                            <div class="d-flex justify-content-between">
+                              <button
+                                class="product-compare add-compare"
+                                data-compare-id="1885"
+                              ></button
+                              ><button
+                                (click)="addtocart(obj)"
+                                class="product-cart-btn add-cart"
+                                data-id="1885"
+                              >
+                                Add Cart
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </owl-carousel-o>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- product -->
+  <div
+    *ngFor="let obj of furniturehomepagedata.category_products; let i = index"
+  >
+    <div *ngIf="i == 2">
+      <div *ngIf="obj.products.length != 0" class="product--heading">
+        <h2 class="category-title">
+          <span _ngcontent-dag-c150=""> {{ obj.category_name }}</span>
+        </h2>
+        <a
+          (click)="routhpathproductwisepageSlider(obj)"
+          class="view-btn-rounded"
+          >View All</a
+        >
+      </div>
+      <div *ngIf="obj.products.length != 0" _ngcontent-dod-c150="">
+        <div _ngcontent-dod-c150="">
+          <div _ngcontent-dod-c150="" class="product-box">
+            <div fxLayout="row wrap">
+              <div class="child-2" style="width: 100%">
+                <owl-carousel-o [options]="featurediscount">
+                  <ng-template
+                    carouselSlide
+                    *ngFor="let obj of obj.products; let i = index"
+                  >
+                    <div class="item">
+                      <div class="product-card" style="margin: 5px">
+                        <div class="product-item-inner">
+                          <div class="product-item-body">
+                            <div class="product-add-on">
+                              <div class="product-coupon"></div>
+                              <div class="product-addon-btn">
+                                <button class="quick-view optacity-0">
+                                  <i class="bi bi-eye"></i>
+                                </button>
+                                <button
+                                  *ngIf="obj.is_wishlist == '1'"
+                                  [style]="{ color: 'red' }"
+                                  (click)="addtowishlist(obj.id, i, 'fp')"
+                                  class="wishlist-btn"
+                                  data-id="1028"
+                                ></button>
+                                <button
+                                  *ngIf="obj.is_wishlist == '0'"
+                                  (click)="addtowishlist(obj.id, i, 'fp')"
+                                  class="wishlist-btn"
+                                  data-id="1028"
+                                ></button>
+                              </div>
+                            </div>
+                            <a
+                              ><div class="product-img">
+                                <img
+                                  (click)="routePath(obj)"
+                                  class="img-fluid owl-lazy"
+                                  src="{{ obj.full_default_product_image }}"
+                                  data-src="{{
+                                    obj.full_default_product_image
+                                  }}"
+                                  alt=""
+                                  style="opacity: 1"
+                                />
+                              </div>
+                            </a>
+                            <a class="product-title" (click)="routePath(obj)">
+                              {{ obj.product_name }}</a
+                            >
+                            <div class="price-label">Our Price</div>
+                            <div class="product-price-box">
+                              <h6 class="product-price">
+                                ₹ {{ obj.offer_price }}
+                              </h6>
+                              <span class="dis-per-sm ml-2">
+                                {{
+                                  discountPer(obj.mrp_price, obj.offer_price)
+                                }}% off</span
+                              >
+                              <div class="product-discount">
+                                MRP <del>₹ {{ obj.mrp_price }}</del>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="product-item-footer">
+                            <div class="d-flex justify-content-between">
+                              <button
+                                class="product-compare add-compare"
+                                data-compare-id="1885"
+                              ></button
+                              ><button
+                                (click)="addtocart(obj)"
+                                class="product-cart-btn add-cart"
+                                data-id="1885"
+                              >
+                                Add Cart
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </owl-carousel-o>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

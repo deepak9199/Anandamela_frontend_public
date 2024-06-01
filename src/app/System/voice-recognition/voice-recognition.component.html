@@ -1,0 +1,16 @@
+<div class="container">
+  <img
+    src="assets/voice recognisation/icons8-sound-40.png"
+    alt="Start Listening"
+    (click)="startListening()"
+    [hidden]="listening"
+  />
+  <img
+    src="assets/voice recognisation/icons8-sound.gif"
+    alt="Stop Listening"
+    (click)="stopListening()"
+    [hidden]="!listening"
+  />
+
+  <p>{{ transcript }}</p>
+</div>

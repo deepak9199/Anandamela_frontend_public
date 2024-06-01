@@ -1,0 +1,10 @@
+html,
+body {
+  margin-top: 110px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--ion-font-family, inherit);
+  background-color: white
+}

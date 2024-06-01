@@ -1,0 +1,343 @@
+<!-- main -->
+<div>
+  <div class="container cart-data-container" style="margin-top: 2%">
+    <div class="my-md-2" style="display: flex; justify-content: space-between">
+      <nav aria-label="breadcrumb" style="width: 100%">
+        <ol
+          class="breadcrumb mb-0 mb-lg-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+          style="display: flex; justify-content: space-between; width: 100%"
+        >
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/']">
+              <i class="fa fa-home" style="margin-right: 5px"></i>Home</a
+            >
+          </li>
+          <li class="breadcrumb-item">
+            <a onclick="window.history.back()"
+              ><i class="fa fa-arrow-left" style="margin-right: 5px"></i>Back</a
+            >
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <!-- loading -->
+    <div
+      style="
+        height: 700px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+      *ngIf="loading"
+    >
+      <app-loading></app-loading>
+    </div>
+    <div *ngIf="!loading">
+      <div
+        *ngIf="cartdetails.cart_list.length == 0"
+        class="container cart-data-container"
+      >
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card border-0 mb-3 mb-lg-12">
+              <div class="card-body cart">
+                <div class="col-sm-12 empty-cart-cls text-center">
+                  <h3 class="font-weight-bold">Your Cart is empty</h3>
+                  <p>Looks like you haven’t made your choice yet</p>
+                  <div>
+                    <img
+                      src="assets/cartpage/images/empty-cart.png"
+                      class="img-fluid mb-4"
+                    />
+                  </div>
+                  <a
+                    [routerLink]="['/']"
+                    class="btn btn-primary"
+                    data-abc="true"
+                    >Continue shopping</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="cartdetails.cart_list.length != 0" class="row mb-md-5 md-3">
+        <div class="col-lg-9 mb-3">
+          <div class="border-bottom border-color-1 mb-0">
+            <h3
+              class="section-title section-title__sm mb-0 pb-2 font-size-18 font-weight-bold"
+            >
+              Shopping Cart
+              <span class="text-blue"
+                >({{ cartdetails.cart_list.length }} items)
+              </span>
+            </h3>
+          </div>
+          <div class="cart-table border-bottom">
+            <table class="table" cellspacing="0">
+              <thead>
+                <tr>
+                  <th class="font-weight-bold">Product Details</th>
+                  <th class="font-weight-bold">Quantity</th>
+                  <th class="font-weight-bold" colspan="2">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of cartdetails.cart_list">
+                  <td>
+                    <div class="product-item__inner remove-prodcut-hover">
+                      <div class="row">
+                        <div class="product-item__header col-4 col-md-4">
+                          <div class="mb-2">
+                            <a class="d-block text-center"
+                              ><img
+                                class="height-122 product-cart-img lazy"
+                                src="{{
+                                  obj.product_details.full_default_product_image
+                                }}"
+                                alt="Image Description"
+                                style=""
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="col-8 col-md-8 align-self-center">
+                          <div class="pr-lg-3">
+                            <h6 class="font-size-12 font-size-14-lg">
+                              <a class="text-blue font-weight-bold">{{
+                                obj.product_details.product_name
+                              }}</a>
+                            </h6>
+                            <p class="cart-joy-label mb-1">Our Price</p>
+                            <div class="d-lg-flex cart-product-price">
+                              <div
+                                class="text-blue-2 font-size-18 font-weight-bold"
+                              >
+                                ₹ {{ obj.product_details.offer_price }}
+                              </div>
+                              <div
+                                class="font-size-14 dash-line tex-gray-6 ml-3 align-self-center"
+                              >
+                                ₹ {{ obj.product_details.mrp_price }}
+                              </div>
+                              <div class="dis-per font-size-14 ml-3">30%</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        class="row cart-extra-feature mt-lg-3 justify-content-end"
+                      ></div>
+                    </div>
+                    <div
+                      class="modal fade"
+                      id="changestore75065"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="changestoreTitle"
+                      aria-hidden="true"
+                    >
+                      <div
+                        class="modal-dialog modal-dialog-centered min-width-600"
+                        role="document"
+                      >
+                        <div class="modal-content p-md-4 p-3">
+                          <button
+                            class="close modal-close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <i class="ec ec-close-remove"></i>
+                          </button>
+                          <div class="modal-body p-0">
+                            <h5 class="font-size-20 font-weight-bold pl-2">
+                              STORE LIST
+                            </h5>
+                            <div class="store-list-container"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td class="vertical-top group-3">
+                    <div class="width-122 border-color-1">
+                      <div class="js-quantity row align-items-center">
+                        <div class="col-auto pr-1">
+                          <div class="row">
+                            <div class="col-auto">
+                              <a
+                                data-product="75990"
+                                data-action="sub"
+                                class="js-minus btn btn-icon btn-xs btn-outline-secondary border-1 text-center updatecart"
+                                (click)="
+                                  updatecartquantityless(obj, quantity.value)
+                                "
+                              >
+                                <small
+                                  class="fas fa-minus btn-icon__inner"
+                                ></small>
+                              </a>
+                            </div>
+                            <div class="col-3 border align-self-center">
+                              <input
+                                #quantity
+                                class="js-result form-control h-auto border-0 rounded p-0 shadow-none text-center"
+                                type="text"
+                                value="1"
+                                min="1"
+                                disabled=""
+                                value="{{ obj.quantity }}"
+                              />
+                            </div>
+                            <div class="col-auto">
+                              <a
+                                data-action="add"
+                                class="js-plus btn btn-icon btn-xs btn-outline-secondary border-1 text-center updatecart"
+                                (click)="
+                                  updatecartquantityPlus(obj, quantity.value)
+                                "
+                              >
+                                <small
+                                  class="fas fa-plus btn-icon__inner"
+                                ></small>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="vertical-top group-3 second-g">
+                    <div class="prodcut-price">
+                      <div class="text-dark font-weight-bold">
+                        {{ obj.product_details.offer_price }}
+                      </div>
+                    </div>
+                  </td>
+                  <td class="group-3 third-g">
+                    <a
+                      class="text-gray-90 updatecart"
+                      data-product="75065"
+                      data-action="delete"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 463 463"
+                        height="17"
+                        class="m-0 vertical-top"
+                        xmlns:v="https://vecta.io/nano"
+                        (click)="deletcart(obj)"
+                      >
+                        <path
+                          d="M412.145 86.709h-6.951V72.532c0-12.104-9.848-21.952-21.952-21.952h-81.053l-9.902-34.66C289.608 6.547 280.928 0 271.18 0h-79.36a22.05 22.05 0 0 0-21.107 15.921l-9.902 34.66H79.758c-12.104 0-21.952 9.848-21.952 21.952V86.71h-6.951a7.5 7.5 0 1 0 0 15h14.753L91.832 429.5c1.503 18.785 17.442 33.5 36.287 33.5h206.762c18.845 0 34.784-14.715 36.287-33.5l26.223-327.79h14.753a7.501 7.501 0 0 0 .001-15.001zM185.136 20.042c.848-2.969 3.597-5.042 6.684-5.042h79.36c3.087 0 5.836 2.073 6.684 5.042l8.725 30.539H176.411l8.725-30.539zM79.758 65.581h216.746c.008 0 .016.002.024.002s.019-.002.028-.002h86.686c3.833 0 6.952 3.119 6.952 6.952V86.71H72.806V72.532a6.96 6.96 0 0 1 6.952-6.951zm276.458 362.722C355.332 439.348 345.961 448 334.881 448H128.119c-11.08 0-20.451-8.651-21.335-19.696L80.656 101.709h301.687l-26.127 326.594zM231.5 426.871a7.5 7.5 0 0 0 7.5-7.5V137.564a7.5 7.5 0 1 0-15 0V419.37a7.5 7.5 0 0 0 7.5 7.501zm-72.522-7.116c.206 4.006 3.518 7.116 7.484 7.116a7.34 7.34 0 0 0 .391-.01 7.5 7.5 0 0 0 7.106-7.875L159.506 137.18c-.212-4.137-3.727-7.319-7.875-7.106a7.5 7.5 0 0 0-7.106 7.875l14.453 281.806zm137.169 7.106l.391.01c3.966 0 7.278-3.11 7.484-7.116l14.452-281.806c.212-4.137-2.969-7.662-7.106-7.875-4.146-.212-7.662 2.97-7.875 7.106l-14.452 281.806c-.211 4.137 2.97 7.662 7.106 7.875z"
+                        ></path>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <div class="bg-light px-5 py-4">
+                <div class="row font-weight-medium">
+                  <div class="col-md-5 mb-2">
+                    <div
+                      class="custom-control custom-radio custom-control-inline"
+                    >
+                      <input
+                        type="radio"
+                        id="customRadioInlineFree"
+                        name="customRadioInline1"
+                        class="custom-control-input deliverySlots"
+                        value="2"
+                        checked=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="border-bottom border-color-1 mb-3">
+            <h3
+              class="section-title section-title__sm mb-0 pb-2 font-size-18 font-weight-bold"
+            >
+              Order Summary
+            </h3>
+          </div>
+          <div class="min-height-155">
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2">
+                  Sub Total({{ cartdetails.cart_list.length }} items)
+                </p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right">
+                  ₹{{ cartdetails.grand_total }}
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2">Delivery Charge</p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right">Free</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2 gifting"></p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right gifting_charges"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8 col-md-8">
+                <p class="mb-2 gifting"></p>
+              </div>
+              <div class="col-4 col-md-4">
+                <p class="font-weight-bold mb-2 text-right gifting_charges"></p>
+              </div>
+            </div>
+          </div>
+          <div class="pt-5 pt-lg-14 border-bottom mb-2">
+            <div
+              class="form-check pl-4 pl-md-0 ml-md-4 pb-2 mb-md-0 border-bottom border-md-bottom-0"
+            ></div>
+          </div>
+          <div class="row">
+            <div class="col-4 col-md-4">
+              <p class="mb-2 font-weight-bold">TOTAL:</p>
+            </div>
+            <div class="col-8 col-md-8 text-right">
+              <div class="prodcut-price text-right">
+                <div class="text-dark font-weight-bold">
+                  ₹ {{ cartdetails.grand_total }}
+                </div>
+              </div>
+              <!-- <small class="text-gray-5">Price Are Inclusive of Taxes</small> -->
+            </div>
+          </div>
+          <div class="mt-3 mb-3">
+            <a
+              style="background-color: #c9d1ff; color: black"
+              (click)="routePath(cartdetails)"
+              type="button"
+              class="btn btn-primary-dark-w btn-block"
+              >Proceed to checkout</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

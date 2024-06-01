@@ -1,0 +1,47 @@
+<main>
+  <!-- nav -->
+  <ul _ngcontent-dag-c150="" class="nav">
+    <li _ngcontent-dag-c150="" class="nav-item" style="width: 50%; float: left">
+      <div
+        _ngcontent-dag-c150=""
+        (click)="electronicsToggle()"
+        [ngClass]="{ active: electronics }"
+        class="nav-link"
+        ng-reflect-ng-class="[object Object]"
+      >
+        <ion-icon
+          _ngcontent-dag-c150=""
+          ng-reflect-name="bulb-outline"
+          aria-label="bulb outline"
+          role="img"
+          class="md hydrated"
+          name="bulb-outline"
+        ></ion-icon>
+        <h6 _ngcontent-dag-c150="">Electronics</h6>
+      </div>
+    </li>
+    <li _ngcontent-dag-c150="" class="nav-item">
+      <div
+        _ngcontent-dag-c150=""
+        (click)="furnitureToggle()"
+        [ngClass]="{ active: furniture }"
+        class="nav-link"
+        ng-reflect-ng-class="[object Object]"
+      >
+        <ion-icon
+          _ngcontent-dag-c150=""
+          ng-reflect-name="bed-outline"
+          aria-label="bed outline"
+          role="img"
+          class="md hydrated"
+          name="bed-outline"
+        ></ion-icon>
+        <h6 _ngcontent-dag-c150="">Furniture</h6>
+      </div>
+    </li>
+  </ul>
+  <!-- electronics -->
+  <app-electroincs *ngIf="electronics"></app-electroincs>
+  <!-- furniture -->
+  <app-furniture *ngIf="furniture"></app-furniture>
+</main>
